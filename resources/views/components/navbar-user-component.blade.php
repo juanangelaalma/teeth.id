@@ -1,7 +1,9 @@
+@php
+$userAuth = auth()->user();
+@endphp
 <x-section-component {{ $attributes->merge(['class' => 'bg-transparent py-0']) }}>
     <nav id="navbar" class="flex flex-row w-full justify-between h-[86px] items-center">
         <div class="flex">
-            {{-- <img src="" alt=""> --}}
             <h1 class="text-primary">Teeth.id</h1>
         </div>
         <ul
@@ -21,27 +23,27 @@
             <li class="text-nav-link text-dark font-normal hover:text-primary transition-colors duration-200">
                 <a href="">Buat Janji</a>
             </li>
+            @if (!$userAuth)
+                <x-main-button-link href="{{ route('login') }}"> Masuk </x-main-button-link>
+            @endif
         </ul>
-        @php
-            $userAuth = auth()->user();
-        @endphp
         @if ($userAuth)
             <div class="relative">
                 <div id="profile"
                     class="w-10 h-10 cursor-pointer bg-dark overflow-hidden rounded-full mr-16 md:mr-2 lg:mr-0">
                     <img class="w-full h-full object-cover object-center"
-                        src="{{ $userAuth->client ? $userAuth->client->photo : '/images/default.jpg' }}"
-                        alt="">
+                        src="{{ $userAuth->client ? $userAuth->client->photo : '/assets/images/default.jpg' }}" alt="">
                 </div>
                 <div id="dropdownProfile"
                     class="absolute right-12 top-12 lg:right-2 z-40 w-[200px] bg-white p-4 shadow-lg hiden-animation rounded-lg">
                     <ul class="flex flex-col w-full space-y-2">
                         <li class="w-full">
-                            <a href=""
+                            <a href="/profile"
                                 class="py-2 w-full hover:text-primary transition-colors duration-300">Profile</a>
                         </li>
                         <li class="w-full">
                             <form action="{{ route('logout') }}" method="post" class="flex flex-start">
+                                @csrf
                                 <button type="submit"
                                     class="w-full text-left hover:text-primary transition-colors duration-300">Log
                                     Out</button>
@@ -50,8 +52,6 @@
                     </ul>
                 </div>
             </div>
-        @else
-            <x-main-button-link href="{{ route('login') }}"> Masuk </x-main-button-link>
         @endif
         <button class="absolute top-4 right-3 md:block lg:hidden z-30" id="menu">
             <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
