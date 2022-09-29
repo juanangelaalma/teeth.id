@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.section-padding {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.hiden-animation {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.4s ease-in-out;
+}
+
+.show-animation {
+    opacity: 1;
+    transform: translateY(0px);
+    transition: all 0.4s ease-in-out;
+}
+
+.section-margin {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.glassmorphism-box {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 1);
+}
+
+.truncate-text {
+  --max-lines: 2;
+  max-height: calc(var(--lh) * var(--max-lines));
+  overflow: hidden;
+}
+
+.animation-x-move-infinite {
+    animation: objectMoveX 10s infinite;
+}
+
+.animation-y-move-infinite {
+    animation: objectMoveY 10s infinite;
+}
+
+.transition-transform {
+    transition: transform;
+}
+
+.duration-500 {
+    transition-duration: 500ms;
+}
+
+.translate-x-0 {
+    transform: translateX(0);
+}
+
+@keyframes objectMoveX {
+    0% {
+        /* left: 0px; */
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(50px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+@keyframes objectMoveY {
+    0% {
+        /* left: 0px; */
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-35px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@media (min-width: 768px) {
+    .section-padding {
+        padding-left: 7rem;
+        padding-right: 7rem;
+    }
+
+    .section-margin {
+        margin-left: 7rem;
+        margin-right: 7rem;
+    }
+}
