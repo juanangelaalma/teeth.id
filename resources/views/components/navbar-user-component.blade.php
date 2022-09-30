@@ -12,7 +12,7 @@ $userAuth = auth()->user();
                 <a href="{{ route('user.home') }}">Beranda</a>
             </li>
             <li class="text-nav-link text-dark font-normal hover:text-primary transition-colors duration-200">
-                <a href="{{ route('user.article') }}">Artikel</a>
+                <a href="{{ route('user.articles.index') }}">Artikel</a>
             </li>
             <li class="text-nav-link text-dark font-normal hover:text-primary transition-colors duration-200">
                 <a href="">Behel Notification</a>

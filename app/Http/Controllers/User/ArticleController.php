@@ -20,4 +20,9 @@ class ArticleController extends Controller
         $articles = Article::latest()->whereNotIn('id', $where)->get();
         return view('articles', compact('articles', 'recommendation'));
     }
+
+    public function search(Request $request) {
+        $articles = Article::where('title', 'like', '%' . $request->keyword . '%')->orWhere('body', 'like', '%' . $request->keyword . '%')->get();
+        return view('articles', compact('articles'));
+    }
 }

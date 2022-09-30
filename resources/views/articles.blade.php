@@ -7,9 +7,10 @@
     <div>
         <x-navbar-user-component class="bg-white"></x-navbar-user-component>
         <x-section-component class="bg-white pt-8">
-            <form action="/" method="post">
+            <form action="/artikel/search" method="post">
+                @csrf
                 <div class="flex flex-row space-x-4">
-                    <x-text-field-component></x-text-field-component>
+                    <x-text-field-component name="keyword"></x-text-field-component>
                     <x-main-button type="submit">Cari</x-main-button>
                 </div>
             </form>
