@@ -14,5 +14,7 @@
 
 
 @section('scripts')
-    @vite('resources/js/main/home.js')
+    @vite('resources/js/dropDownProfile.js')
+    @vite('resources/js/navbar.js')
+    @vite('resources/js/review.js')
 @endsection

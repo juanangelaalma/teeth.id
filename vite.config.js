@@ -8,7 +8,7 @@ export default defineConfig({
                 input: 'resources/js/app.jsx',
                 refresh: true,
             },
-            'resources/js/main/*'
+            'resources/js/*'
         ]),
     ],
 });

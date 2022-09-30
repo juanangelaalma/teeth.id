@@ -1,21 +1,3 @@
-const navbar = document.getElementById("navbar");
-const ul = navbar.getElementsByTagName("ul");
-
-const menu = document.getElementById("menu");
-
-menu.addEventListener("click", toggleNav);
-
-function toggleNav(e) {
-    ul[0].classList.toggle("translate-x-0");
-    ul[0].classList.add("transition-transform");
-    ul[0].classList.add("duration-500");
-    if (ul[0].classList.contains("translate-x-0")) {
-        menu.style.position = "fixed";
-    } else {
-        menu.style.position = "inline-block";
-    }
-}
-
 let index = 0;
 
 const prevButton = document.getElementById("prev");
@@ -55,19 +37,4 @@ function nextAction() {
     reviewSliderContainer.style.transform = `translateX(-${
         index * (window.innerWidth > 1023 ? 33.333333 : 100)
     }%)`;
-}
-
-const profile = document.getElementById("profile");
-const dropDownProfile = document.getElementById('dropdownProfile');
-
-if(profile) {
-    profile.addEventListener('click', function() {
-        if(dropDownProfile.classList.contains('hiden-animation')) {
-            dropDownProfile.classList.remove('hiden-animation');
-            dropDownProfile.classList.add('show-animation');
-        } else {
-            dropDownProfile.classList.remove('show-animation');
-            dropDownProfile.classList.add('hiden-animation');
-        }
-    })
 }
