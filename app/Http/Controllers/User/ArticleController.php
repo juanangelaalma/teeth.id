@@ -25,4 +25,9 @@ class ArticleController extends Controller
         $articles = Article::where('title', 'like', '%' . $request->keyword . '%')->orWhere('body', 'like', '%' . $request->keyword . '%')->get();
         return view('articles', compact('articles'));
     }
+
+    public function show() {
+        $article = Article::with(['doctor', 'doctor.user'])->where('slug', request()->slug)->first();
+        return view('articles.show', compact('article'));
+    }
 }

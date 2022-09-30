@@ -16,21 +16,6 @@ function toggleNav(e) {
     }
 }
 
-const profile = document.getElementById("profile");
-const dropDownProfile = document.getElementById('dropdownProfile');
-
-console.log(profile);
-
-profile.addEventListener('click', function() {
-    if(dropDownProfile.classList.contains('hiden-animation')) {
-        dropDownProfile.classList.remove('hiden-animation');
-        dropDownProfile.classList.add('show-animation');
-    } else {
-        dropDownProfile.classList.remove('show-animation');
-        dropDownProfile.classList.add('hiden-animation');
-    }
-})
-
 let index = 0;
 
 const prevButton = document.getElementById("prev");
@@ -70,4 +55,19 @@ function nextAction() {
     reviewSliderContainer.style.transform = `translateX(-${
         index * (window.innerWidth > 1023 ? 33.333333 : 100)
     }%)`;
+}
+
+const profile = document.getElementById("profile");
+const dropDownProfile = document.getElementById('dropdownProfile');
+
+if(profile) {
+    profile.addEventListener('click', function() {
+        if(dropDownProfile.classList.contains('hiden-animation')) {
+            dropDownProfile.classList.remove('hiden-animation');
+            dropDownProfile.classList.add('show-animation');
+        } else {
+            dropDownProfile.classList.remove('show-animation');
+            dropDownProfile.classList.add('hiden-animation');
+        }
+    })
 }
