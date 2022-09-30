@@ -11,9 +11,11 @@ class ArticleComponent extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
 
+    public $articlesRecommendation = [];
+    public function __construct($articlesRecommendation)
+    {
+        $this->articlesRecommendation = $articlesRecommendation;
     }
 
     /**
