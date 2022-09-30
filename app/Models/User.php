@@ -44,17 +44,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function client() {
-        if(!$this->role || $this->role === 'user') {
-            return $this->hasOne(Client::class);
-        }
-        throw new Error('This user is not a user');
+    public function client()
+    {
+        return $this->hasOne(Client::class);
+    }
+    public function doctor()
+    {
+        return $this->hasOne(Doctor::class);
     }
 
-    public function doctor() {
-        if(!$this->role || $this->role === 'doctor') {
-            return $this->hasOne(Doctor::class);
-        }
-        throw new Error('This user is not a doctor');
+    public function isDoctor()
+    {
+        return $this->role === 'doctor';
+    }
+
+    public function isUser()
+    {
+        return $this->role === 'user';
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
     }
 }

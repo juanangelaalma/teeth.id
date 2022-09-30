@@ -9,7 +9,7 @@
             <a href="{{ route('user.articles.show', $articlesRecommendation[0]->slug) }}" class="w-full lg:w-1/2">
                 <div class="flex flex-col lg:px-4 py-2 space-y-4">
                     <div class="w-full rounded-2xl max-h-[20rem] max-w-[35.5rem] overflow-hidden">
-                        <img class="w-full object-cover object-center" src="https://picsum.photos/id/237/300/200"
+                        <img class="w-full object-cover object-center" src="{{ $articlesRecommendation[0]->image }}"
                             alt="">
                     </div>
                     <div class="flex items-start flex-col space-y-3 max-w-[35.5rem]">

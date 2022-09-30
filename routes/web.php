@@ -17,6 +17,10 @@ Route::controller(ArticleController::class)->prefix('artikel')->name('user.artic
     Route::get('/{slug}', 'show')->name('show');
 });
 
+Route::get('doctor/dashboard', function() {
+    return 'dashboard doctor';
+})->middleware('doctor');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
