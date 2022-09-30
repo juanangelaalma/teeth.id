@@ -14,6 +14,7 @@ Route::controller(ArticleController::class)->prefix('artikel')->name('user.artic
     Route::post('/search', function() {
         return redirect('artikel/search?keyword=' . request()->keyword);
     });
+    Route::get('/{slug}', 'show')->name('show');
 });
 
 Route::get('/dashboard', function () {

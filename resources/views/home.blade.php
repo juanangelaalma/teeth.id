@@ -7,7 +7,7 @@
         <x-features-component></x-features-component>
         <x-about-component></x-about-component>
         <x-reviews-component></x-reviews-component>
-        <x-article-component></x-article-component>
+        <x-article-component :articlesRecommendation="$recommendation"></x-article-component>
         <x-footer-component></x-footer-component>
     </div>
 @endsection
