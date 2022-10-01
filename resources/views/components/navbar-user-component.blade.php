@@ -30,9 +30,26 @@ $userAuth = auth()->user();
         @if ($userAuth)
             <div class="relative">
                 <div id="profile"
-                    class="w-10 h-10 cursor-pointer bg-dark overflow-hidden rounded-full mr-16 md:mr-2 lg:mr-0">
-                    <img class="w-full h-full object-cover object-center"
-                        src="{{ $userAuth->client ? $userAuth->client->photo : '/assets/images/default.jpg' }}" alt="">
+                    class="cursor-pointer lg:border flex justify-start items-center mr-16 lg:mr-0 py-1 space-x-2 px-3 rounded-lg">
+                    @if ($userAuth->isDoctor())
+                        <div class="w-10 h-10 overflow-hidden rounded-full md:mr-2 lg:mr-0">
+                            <img class="w-full h-full object-cover object-center"
+                            src="{{ ($userAuth->doctor && $userAuth->doctor->photo) ? $userAuth->doctor->photo : '/assets/images/default.jpg' }}" alt="">
+                        </div>
+                        <span class="text-sm hidden lg:block">dr. {{ $userAuth->name }} </span>
+                        @if ($userAuth->isVerified())
+                        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.9086 0L13.3799 2.27486L16.0859 2.41029L16.2226 5.11586L18.4987 6.58586L17.264 8.99786L18.5 11.4086L16.2251 12.8799L16.0897 15.5859L13.3841 15.7226L11.9141 17.9987L9.50214 16.764L7.09143 18L5.62014 15.7251L2.91414 15.5897L2.77743 12.8841L0.501286 11.4141L1.736 9.00214L0.5 6.59143L2.77486 5.12014L2.91029 2.41414L5.61586 2.27743L7.08586 0.00128572L9.49786 1.236L11.9086 0Z" fill="#42A5F5"/>
+                            <path d="M8.38398 12.1093L5.59955 9.3257L6.50898 8.4167L8.39769 10.3054L12.4983 6.33084L13.3931 7.25398L8.38398 12.1093Z" fill="white"/>
+                        </svg> 
+                        @endif
+                    @else
+                    <div class="w-10 h-10 overflow-hidden rounded-full md:mr-2 lg:mr-0">
+                        <img class="w-full h-full object-cover object-center"
+                        src="{{ ($userAuth->client && $userAuth->client->photo) ? $userAuth->client->photo  : '/assets/images/default.jpg' }}" alt="">
+                    </div>
+                    <span class="text-sm hidden lg:block">{{ $userAuth->name }} </span>
+                    @endif   
                 </div>
                 <div id="dropdownProfile"
                     class="absolute right-12 top-12 lg:right-2 z-40 w-[200px] bg-white p-4 shadow-lg hiden-animation rounded-lg">
