@@ -20,7 +20,7 @@ $userAuth = auth()->user();
                     <div class="w-2 h-2 rounded-full bg-red-400 inline-block"></div>
                 </li>
                 <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
-                    <a href="">Dokumen</a>
+                    <a href="{{ route('doctor.documents.index') }}">Dokumen</a>
                 </li>
                 @if (!$userAuth)
                     <x-main-button-link href="{{ route('login') }}"> Masuk </x-main-button-link>

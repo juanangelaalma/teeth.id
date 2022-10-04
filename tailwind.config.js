@@ -26,7 +26,8 @@ module.exports = {
             },
             boxShadow: {
                 'button-primary': '8px 8px 10px rgba(82, 113, 255, 0.3)',
-                'card-article': '4px 4px 40px rgba(206, 206, 206, 0.4)'
+                'card-article': '4px 4px 40px rgba(206, 206, 206, 0.4)',
+                'auth-card': '5px 5px #0061FF'
             },
             fontFamily: {
                 'sans': ['Roboto', 'sans-serif'],

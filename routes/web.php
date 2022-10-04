@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Doctor\DashboardController;
 use App\Http\Controllers\Doctor\DoctorArticleController;
+use App\Http\Controllers\Doctor\DoctorDocumentController;
 use App\Http\Controllers\User\ArticleController;
 use App\Http\Controllers\User\HomeController;
 use App\Models\Article;
@@ -25,6 +26,11 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
 
     Route::prefix('artikel')->group(function() {
         Route::get('/', [DoctorArticleController::class, 'index'])->name('doctor.articles.index');
+    });
+
+    Route::prefix('dokumen')->group(function() {
+        Route::get('/', [DoctorDocumentController::class, 'index'])->name('doctor.documents.index');
+        Route::post('/create', [DoctorDocumentController::class, 'create'])->name('doctor.documents.create');
     });
 });
 
