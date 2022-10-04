@@ -22,7 +22,8 @@ module.exports = {
                 'secondary-light': 'rgba(255, 168, 89, 0.3)',
                 'dark': '#2A2A2B',
                 'dark-gray': '#515559',
-                'light-gray': '#8B8B8C'
+                'light-gray': '#8B8B8C',
+                'secondary-opacity': 'rgba(255, 169, 89, 0.2)'
             },
             boxShadow: {
                 'button-primary': '8px 8px 10px rgba(82, 113, 255, 0.3)',

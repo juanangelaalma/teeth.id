@@ -20,7 +20,7 @@
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow section-padding mb-6">
-                    <div class="max-w-7xl mx-auto py-6">
+                    <div class="max-w-[1400px] mx-auto py-6">
                         {{ $header }}
                     </div>
                 </header>
@@ -28,7 +28,9 @@
 
             <!-- Page Content -->
             <main class="section-padding">
-                {{ $slot }}
+                <div class="max-w-[1400px] mx-auto">
+                    {{ $slot }}
+                </div>
             </main>
         </div>
     </body>
