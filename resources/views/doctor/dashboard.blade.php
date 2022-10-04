@@ -52,15 +52,14 @@
                     verifikasi akun anda pada <a href="" class="text-primary">Verifikasi Sekarang</a></p>
             </div>
             <x-dashboard-section-card class="p-0">
-                <div class="flex flex-row">
+                <div class="flex flex-col lg:flex-row">
                     <div class="p-6">
                         <h1 class="text-primary text-section-paragraph">Selamat datang dokter 🎉</h1>
                         <p class="text-content-paragraph text-dark-gray mb-6"><span class="text-dark font-semibold">Tetap semangat!!.</span> Masa depan adalah milik Anda yang telah menyiapkannya dari
                             hari ini</p>
                         <x-main-button-link>Lihat Janji</x-main-button-link>
                     </div>
-                    <div>
-                        <img class="w-[248px]" src="{{ asset('assets/images/doctor-about.png') }}" alt="">
+                        <img class="w-full lg:w-[200px]" src="{{ asset('assets/images/doctor-about.png') }}" alt="">
                     </div>
                 </div>
             </x-dashboard-section-card>

@@ -29,13 +29,13 @@ $userAuth = auth()->user();
         </div>
         @if ($userAuth)
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
                             class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                             <div
-                                class="cursor-pointer lg:border flex justify-start items-center mr-16 lg:mr-0 py-1 space-x-2 px-3 rounded-lg">
+                                class="cursor-pointer lg:border flex justify-start items-center mr-16 sm:mr-10 md:mr-0 py-1 space-x-2 px-3 rounded-lg">
                                 @if ($userAuth->isDoctor())
                                     <div class="w-10 h-10 overflow-hidden rounded-full md:mr-2 lg:mr-0">
                                         <img class="w-full h-full object-cover object-center"
