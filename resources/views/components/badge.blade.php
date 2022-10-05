@@ -1,8 +1,8 @@
 @php
     $TYPES = [
-        'success' => 'border-primary text-primary',
+        'accepted' => 'border-primary text-primary',
         'pending' => 'border-secondary text-secondary',
-        'fail' => 'border-red-400 text-red-400',
+        'rejected' => 'border-red-500 text-red-500',
     ];
 @endphp
 

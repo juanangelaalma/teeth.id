@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Certification extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'doctor_id',
+        'cv',
+        'str',
+        'sip',
+        'status',
+    ];
 
     public function doctor() {
         return $this->belongsTo(Doctor::class);
