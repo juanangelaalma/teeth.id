@@ -10,7 +10,7 @@
             <form action="/artikel/search" method="post">
                 @csrf
                 <div class="flex flex-row space-x-4">
-                    <x-text-field-component name="keyword"></x-text-field-component>
+                    <x-text-field-component name="keyword" placeholder="Cari berdasarkan judul, isi"></x-text-field-component>
                     <x-main-button type="submit">Cari</x-main-button>
                 </div>
             </form>

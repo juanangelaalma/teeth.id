@@ -8,11 +8,14 @@
                 <div class="flex flex-row justify-between">
                     <div class="flex flex-row space-x-4">
                         <div class="w-[50px] h-[50px] bg-dark rounded-full overflow-hidden">
-                            <img class="w-full h-full object-cover object-center" src="" alt="">
+                            <img class="w-full h-full object-cover object-center"
+                                src="{{ $article->doctor->photo ? $article->doctor->photo : '/assets/images/default.jpg' }}"
+                                alt="">
                         </div>
                         <div class="flex flex-col">
                             <h6 class="text-paragraph text-dark-gray">dr. {{ $article->doctor->user->name }}</h6>
-                            <p class="text-mb-content-pragraph text-light-gray">{{ timestamp_to_date($article->created_at) }}</p>
+                            <p class="text-mb-content-pragraph text-light-gray">
+                                {{ timestamp_to_date($article->created_at) }}</p>
                         </div>
                     </div>
                     <div class="flex flex-row space-x-2 justify-end items-center">
@@ -53,20 +56,21 @@
                 <div class="flex flex-col space-y-6">
                     <h1 class="text-content-heading lg:text-section-header text-dark font-medium">{{ $article->title }}</h1>
                     <div class="w-full rounded-2xl max-h-[230px] lg:max-h-[440px] overflow-hidden">
-                        <img class="w-full object-cover object-center"
-                            src="{{ $article->image }}"
-                            alt="">
+                        <img class="w-full object-cover object-center" src="{{ $article->image }}" alt="">
                     </div>
                     <p class="text-mb-paragraph">{{ $article->body }}</p>
                 </div>
             </div>
             <div class="self-start w-full flex flex-col lg:w-1/4 mt-8 lg:mt-0 pl-0 items-center space-y-4 sticky top-4">
-                <h4 class="text-content-heading text-center">Detail dokter</h4>
+                <h4 class="text-content-heading text-center">Detail penulis</h4>
                 <div class="w-[88px] h-[88px] bg-dark rounded-full overflow-hidden">
-                    <img class="w-full h-full object-cover object-center" src="" alt="">
+                    <img class="w-full h-full object-cover object-center"
+                        src="{{ $article->doctor->photo ? $article->doctor->photo : '/assets/images/default.jpg' }}"
+                        alt="">
                 </div>
                 <div class="space-y-4">
-                    <h6 class="text-center text-dark text-content-date leading-[16px] mx-auto">dr. {{ $article->doctor->user->name }}</h6>
+                    <h6 class="text-center text-dark text-content-date leading-[16px] mx-auto">dr.
+                        {{ $article->doctor->user->name }}</h6>
                     <div class="flex flex-row items-end justify-center space-x-2 text-dark-gray mx-auto">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
