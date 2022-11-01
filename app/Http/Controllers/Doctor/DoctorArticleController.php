@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Image;
 
 class DoctorArticleController extends Controller
 {
@@ -27,22 +28,31 @@ class DoctorArticleController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,svg',
         ]);
 
+        $image = $request->file('image');
+
+        // create unique slug
         $slug = SlugService::createSlug(Article::class, 'slug', $request->title);
 
-        $doctor_id = Auth::user()->doctor->id;
+        // compress the image
+        $image_compressed = Image::make($image->getRealPath());
+        $image_compressed->resize(600, 450, function ($constraint) {
+            $constraint->aspectRatio();
+        });
 
-        $filename = $slug . '.' . $request->image->extension();
-        
-        $path = Storage::putFileAs('articles', $request->image, $filename);
+        // store image
+        $pathname = '/storage/articles/' . $slug . '.' . $request->image->extension();
+        $image_compressed->save(public_path($pathname));
+
+        $doctor_id = Auth::user()->doctor->id;
 
         Article::create([
             'title' => $request->title,
             'slug'  => $slug,
             'body'  => $request->body,
-            'image' => "/storage/$path",
+            'image' => $pathname,
             'doctor_id' => $doctor_id,
         ]);
 
