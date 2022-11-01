@@ -7,7 +7,7 @@
             <div class="w-full lg:w-3/4 space-y-6 lg:border-r lg:pr-8">
                 <div class="flex flex-row justify-between">
                     <div class="flex flex-row space-x-4">
-                        <div class="w-[50px] h-[50px] bg-dark rounded-full overflow-hidden">
+                        <div class="w-[50px] h-[50px] rounded-full overflow-hidden">
                             <img class="w-full h-full object-cover object-center"
                                 src="{{ $article->doctor->photo ? $article->doctor->photo : '/assets/images/default.jpg' }}"
                                 alt="">
@@ -63,7 +63,7 @@
             </div>
             <div class="self-start w-full flex flex-col lg:w-1/4 mt-8 lg:mt-0 pl-0 items-center space-y-4 sticky top-4">
                 <h4 class="text-content-heading text-center">Detail penulis</h4>
-                <div class="w-[88px] h-[88px] bg-dark rounded-full overflow-hidden">
+                <div class="w-[88px] h-[88px] rounded-full overflow-hidden">
                     <img class="w-full h-full object-cover object-center"
                         src="{{ $article->doctor->photo ? $article->doctor->photo : '/assets/images/default.jpg' }}"
                         alt="">

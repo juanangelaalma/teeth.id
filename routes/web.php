@@ -26,6 +26,8 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
 
     Route::prefix('artikel')->group(function() {
         Route::get('/', [DoctorArticleController::class, 'index'])->name('doctor.articles.index');
+        Route::get('/create', [DoctorArticleController::class, 'create'])->name('doctor.articles.create');
+        Route::post('/store', [DoctorArticleController::class, 'store'])->name('doctor.articles.store');
     });
 
     Route::prefix('dokumen')->group(function() {
