@@ -58,7 +58,7 @@
                     <div class="w-full rounded-2xl max-h-[230px] lg:max-h-[440px] overflow-hidden">
                         <img class="w-full object-cover object-center" src="{{ $article->image }}" alt="">
                     </div>
-                    <p class="text-mb-paragraph">{{ $article->body }}</p>
+                    <p class="text-mb-paragraph">{!! $article->body !!}</p>
                 </div>
             </div>
             <div class="self-start w-full flex flex-col lg:w-1/4 mt-8 lg:mt-0 pl-0 items-center space-y-4 sticky top-4">
