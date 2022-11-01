@@ -58,4 +58,9 @@ class DoctorArticleController extends Controller
 
         return redirect()->route('doctor.articles.index')->with('success', 'Artikel berhasil ditambahkan');
     }
+
+    public function destroy(Article $article) {
+        $article->delete();
+        return redirect()->route('doctor.articles.index')->with('success', 'Artikel berhasil dihapus');
+    }
 }

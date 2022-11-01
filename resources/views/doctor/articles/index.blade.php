@@ -50,7 +50,7 @@
                                 <a href="" class="bg-secondary flex justify-center py-1 px-3 text-white rounded-md lg:inline-block text-sm cursor-pointer">
                                     Edit
                                 </a>
-                                <a href="" class="bg-red-500 flex justify-center py-1 px-3 text-white rounded-md lg:inline-block text-sm cursor-pointer">
+                                <a href="{{ route('doctor.articles.destroy', $article) }}" class="bg-red-500 flex justify-center py-1 px-3 text-white rounded-md lg:inline-block text-sm cursor-pointer">
                                     Hapus  
                                 </a>
                             </td>
