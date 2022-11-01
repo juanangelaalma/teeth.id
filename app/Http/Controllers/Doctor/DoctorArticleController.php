@@ -56,6 +56,6 @@ class DoctorArticleController extends Controller
             'doctor_id' => $doctor_id,
         ]);
 
-        return redirect()->route('doctor.articles.index')->with('success', 'Article created successfully');
+        return redirect()->route('doctor.articles.index')->with('success', 'Artikel berhasil ditambahkan');
     }
 }

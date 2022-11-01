@@ -6,6 +6,7 @@
     </x-slot>
 
     <x-dashboard-section-card title="Artikel anda">
+        <x-success-alert />
         <div class="px-6 overflow-x-scroll lg:overflow-x-hidden">
             <div class="w-full h-20 flex items-center">
                 <x-main-button-link href="{{ route('doctor.articles.create') }}" class="my-6 flex items-center space-x-2"> 
