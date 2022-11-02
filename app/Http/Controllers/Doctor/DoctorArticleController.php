@@ -49,12 +49,20 @@ class DoctorArticleController extends Controller
         Article::create([
             'title' => $request->title,
             'slug'  => $slug,
-            'body'  => $request->body,
+            'body'  => str_replace('../../', '/', $request->body),
             'image' => $pathname . $filename,
             'doctor_id' => $doctor_id,
         ]);
 
         return redirect()->route('doctor.articles.index')->with('success', 'Artikel berhasil ditambahkan');
+    }
+
+    public function edit(Article $article) {
+        return view('doctor.articles.edit', compact('article'));
+    }
+
+    public function update(Article $article) {
+        dd($article);
     }
 
     public function destroy(Article $article) {
