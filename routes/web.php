@@ -3,6 +3,7 @@
 use App\Http\Controllers\Doctor\DashboardController;
 use App\Http\Controllers\Doctor\DoctorArticleController;
 use App\Http\Controllers\Doctor\DoctorDocumentController;
+use App\Http\Controllers\MediaUploadController;
 use App\Http\Controllers\User\ArticleController;
 use App\Http\Controllers\User\HomeController;
 use App\Models\Article;
@@ -36,5 +37,7 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
         Route::post('/create', [DoctorDocumentController::class, 'create'])->name('doctor.documents.create');
     });
 });
+
+Route::post('upload', [MediaUploadController::class, 'upload']);
 
 require __DIR__.'/auth.php';

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
+use App\Services\ImageService;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,16 +36,13 @@ class DoctorArticleController extends Controller
 
         // create unique slug
         $slug = SlugService::createSlug(Article::class, 'slug', $request->title);
+        $pathname = '/storage/articles/';
+        $filename = $slug . '.' . $request->image->extension();
 
         // compress the image
-        $image_compressed = Image::make($image->getRealPath());
-        $image_compressed->resize(600, 450, function ($constraint) {
-            $constraint->aspectRatio();
-        });
+        $image_compressed = ImageService::compressImage($image, 600, 450, $pathname);
 
-        // store image
-        $pathname = '/storage/articles/' . $slug . '.' . $request->image->extension();
-        $image_compressed->save(public_path($pathname));
+        $image_compressed->save(public_path($pathname . $filename));
 
         $doctor_id = Auth::user()->doctor->id;
 
@@ -52,7 +50,7 @@ class DoctorArticleController extends Controller
             'title' => $request->title,
             'slug'  => $slug,
             'body'  => $request->body,
-            'image' => $pathname,
+            'image' => $pathname . $filename,
             'doctor_id' => $doctor_id,
         ]);
 

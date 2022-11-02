@@ -62,8 +62,10 @@
                         <span class="text-dark mb-1">
                             Body
                         </span>
-                        <textarea class="form-control" name="body" id="body">{{ old('body') }}</textarea>
-                        <x-input-error :messages="$errors->get('body')" class="mt-2" />
+                        <div class="h-[500px]">
+                            <textarea class="form-control border-0" name="body" id="body">{{ old('body') }}</textarea>
+                            <x-input-error :messages="$errors->get('body')" class="mt-2" />
+                        </div>
                     </label>
                     <x-main-button class="w-full">POST</x-main-button>
                 </form>
