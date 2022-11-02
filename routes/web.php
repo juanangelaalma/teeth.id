@@ -29,6 +29,8 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
         Route::get('/', [DoctorArticleController::class, 'index'])->name('doctor.articles.index');
         Route::get('/create', [DoctorArticleController::class, 'create'])->name('doctor.articles.create');
         Route::post('/store', [DoctorArticleController::class, 'store'])->name('doctor.articles.store');
+        Route::get('/{article:id}/edit', [DoctorArticleController::class, 'edit'])->name('doctor.articles.edit');
+        Route::post('/{article:id}/update', [DoctorArticleController::class, 'update'])->name('doctor.articles.update');
         Route::get('/{article:id}/delete', [DoctorArticleController::class, 'destroy'])->name('doctor.articles.destroy');
     });
 

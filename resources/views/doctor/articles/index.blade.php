@@ -47,7 +47,7 @@
                             <td class="pr-6 pl-6 py-3 text-xs">{{ $article->title }}</td>
                             <td class="pr-6 pl-6 py-3 text-xs truncate">{{ timestamp_to_date($article->created_at) }}</td>
                             <td class="pr-6 pl-6 py-3 space-y-2 lg:space-y-0">
-                                <a href="" class="bg-secondary flex justify-center py-1 px-3 text-white rounded-md lg:inline-block text-sm cursor-pointer">
+                                <a href="{{ route('doctor.articles.edit', $article) }}" class="bg-secondary flex justify-center py-1 px-3 text-white rounded-md lg:inline-block text-sm cursor-pointer">
                                     Edit
                                 </a>
                                 <a href="{{ route('doctor.articles.destroy', $article) }}" class="bg-red-500 flex justify-center py-1 px-3 text-white rounded-md lg:inline-block text-sm cursor-pointer">

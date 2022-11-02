@@ -61,8 +61,40 @@ class DoctorArticleController extends Controller
         return view('doctor.articles.edit', compact('article'));
     }
 
-    public function update(Article $article) {
-        dd($article);
+    public function update(Request $request, Article $article) {
+        $request->validate([
+            'title'     => 'required|string|max:255',
+            'body'      => 'required',
+        ]);
+
+        // create unique slug
+        $slug = SlugService::createSlug(Article::class, 'slug', $request->title);
+
+        $image = $request->file('image');
+
+        if($image) {
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,svg',
+            ]);
+
+            $pathname = '/storage/articles/';
+            $filename = $slug . '.' . $request->image->extension();
+
+            // compress the image
+            $image_compressed = ImageService::compressImage($image, 600, 450, $pathname);
+
+            // willbe override
+            $image_compressed->save(public_path($pathname . $filename));
+
+            $article->image = $pathname . $filename;
+        }
+
+        $article->title = $request->title;
+        $article->slug = $slug;
+        $article->body = str_replace('//storage', '/storage', $request->body);
+        $article->save();
+
+        return redirect()->route('doctor.articles.index')->with('success', 'Artikel berhasil diubah');
     }
 
     public function destroy(Article $article) {
