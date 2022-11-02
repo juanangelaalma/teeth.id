@@ -7,6 +7,7 @@
 
     <x-dashboard-section-card title="Artikel anda">
         <x-success-alert />
+        @if (Auth::user()->isVerified())
         <div class="px-6 overflow-x-scroll lg:overflow-x-hidden">
             <div class="w-full h-20 flex items-center">
                 <x-main-button-link href="{{ route('doctor.articles.create') }}" class="my-6 flex items-center space-x-2"> 
@@ -60,6 +61,12 @@
                 @endif
             </table>
         </div>
+        @else 
+        <div class="bg-secondary-opacity w-full rounde-xl rounded-lg p-4 mb-4">
+            <p class="text-dark-gray">Anda tidak akan bisa membuat artikel sebelum anda mendapatkan verifikasi. Lakukan upload dokumen agar kami dapat
+                verifikasi akun anda pada <a href="{{ route('doctor.documents.index') }}" class="text-primary">Verifikasi Sekarang</a></p>
+        </div>
+        @endif
         {{ $articles->links() }}
     </x-dashboard-section-card>
 </x-app-layout>
