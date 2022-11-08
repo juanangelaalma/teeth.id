@@ -3,6 +3,7 @@
 use App\Http\Controllers\Doctor\DashboardController;
 use App\Http\Controllers\Doctor\DoctorArticleController;
 use App\Http\Controllers\Doctor\DoctorDocumentController;
+use App\Http\Controllers\MediaUploadController;
 use App\Http\Controllers\User\ArticleController;
 use App\Http\Controllers\User\HomeController;
 use App\Models\Article;
@@ -26,6 +27,11 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
 
     Route::prefix('artikel')->group(function() {
         Route::get('/', [DoctorArticleController::class, 'index'])->name('doctor.articles.index');
+        Route::get('/create', [DoctorArticleController::class, 'create'])->name('doctor.articles.create');
+        Route::post('/store', [DoctorArticleController::class, 'store'])->name('doctor.articles.store');
+        Route::get('/{article:id}/edit', [DoctorArticleController::class, 'edit'])->name('doctor.articles.edit');
+        Route::post('/{article:id}/update', [DoctorArticleController::class, 'update'])->name('doctor.articles.update');
+        Route::get('/{article:id}/delete', [DoctorArticleController::class, 'destroy'])->name('doctor.articles.destroy');
     });
 
     Route::prefix('dokumen')->group(function() {
@@ -33,5 +39,7 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
         Route::post('/create', [DoctorDocumentController::class, 'create'])->name('doctor.documents.create');
     });
 });
+
+Route::post('upload', [MediaUploadController::class, 'upload']);
 
 require __DIR__.'/auth.php';

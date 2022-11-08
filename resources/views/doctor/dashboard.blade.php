@@ -47,10 +47,12 @@
             </x-dashboard-section-card>
         </div>
         <div class="w-full pl-0 lg:pl-3 lg:w-2/3">
+            @if (!Auth::user()->isVerified())
             <div class="bg-secondary-opacity w-full rounde-xl rounded-lg p-4 mb-4">
                 <p class="text-dark-gray">Akun Anda belum diverifikasi. Lakukan upload dokumen agar kami dapat
-                    verifikasi akun anda pada <a href="" class="text-primary">Verifikasi Sekarang</a></p>
+                    verifikasi akun anda pada <a href="{{ route('doctor.documents.index') }}" class="text-primary">Verifikasi Sekarang</a></p>
             </div>
+            @endif
             <x-dashboard-section-card class="p-0">
                 <div class="flex flex-col lg:flex-row">
                     <div class="p-6">

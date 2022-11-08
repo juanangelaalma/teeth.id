@@ -11,16 +11,11 @@ class Badge extends Component
      *
      * @return void
      */
-    const TYPES = [
-        'success' => 'border-primary text-primary',
-        'pending' => 'border-secondary text-secondary',
-        'fail' => 'border-red-400 text-red-400',
-    ];
 
-    public $styles = "";
+    public $type = "";
     public function __construct($type = "success")
     {
-        $this->styles = self::TYPES[$type];
+        $this->type = $type;
     }
 
     /**

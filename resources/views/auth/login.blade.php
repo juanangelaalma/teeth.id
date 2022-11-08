@@ -1,10 +1,14 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
-                <p class="text-primary">Teeth.id</p>
-            </a>
+            <div class="flex items-center space-y-2 flex-col">
+                <a href="/">
+                    {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
+                    <p class="text-primary">Teeth.id</p>
+                </a>
+                <h1 class="text-primary text-section-header font-semibold">Login</h1>
+                <p>Sign in to your account</p>
+            </div>
         </x-slot>
 
         <!-- Session Status -->

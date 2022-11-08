@@ -15,7 +15,7 @@
                     <div class="flex items-start flex-col space-y-3 max-w-[35.5rem]">
                         <span class="text-primary text-content-date">{{ timestamp_to_date($articlesRecommendation[0]->created_at) }}</span>
                         <h4 class="text-dark text-content-heading font-bold">{{ $articlesRecommendation[0]->title }}</h4>
-                        <p class="text-light-gray text-content-paragraph font-light">{{ strip_tags(substr($articlesRecommendation[0]->body, 0, 200), null) }}</p>
+                        <p class="text-light-gray text-content-paragraph font-light">{{ strip_tags(substr(str_replace("&nbsp;", "", $articlesRecommendation[0]->body), 0, 200), null) }}</p>
                         <span class="text-secondary text-btn-more">Learn more -></span>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                                     class="text-dark leading-6 lg:leading-auto text-xl lg:text-xl font-bold line-clamp-2">
                                     {{ $articlesRecommendation[$i]->title }}</h4>
                                 <p class="text-light-gray leading-4 lg:leading-auto text-sm lg:text-md lg:leading-6 font-light line-clamp-2">
-                                    {{ $articlesRecommendation[$i]->body }}
+                                    {{ strip_tags(substr(str_replace("&nbsp;", "", $articlesRecommendation[$i]->body), 0, 200), null) }}
                                 </p>
                             </div>
                         </a>
