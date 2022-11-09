@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class Feedback extends Component
@@ -11,9 +12,10 @@ class Feedback extends Component
      *
      * @return void
      */
+    public $user = null;
     public function __construct()
     {
-        //
+        $this->user = Auth::user();
     }
 
     /**

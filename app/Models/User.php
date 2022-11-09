@@ -72,4 +72,12 @@ class User extends Authenticatable
     public function isVerified() {
         return $this->doctor->is_verified;
     }
+
+    public function rate() {
+        return $this->hasMany(Feedback::class);
+    }
+
+    public function hasRatedWebsite() {
+        return $this->rate()->count() !== 0;
+    }
 }

@@ -9,8 +9,6 @@
         <x-reviews-component></x-reviews-component>
         <x-article-component :articlesRecommendation="$recommendation"></x-article-component>
         <x-footer-component></x-footer-component>
-        {{-- Feedback --}}
-        <x-feedback />
     </div>
 @endsection
 
