@@ -12,6 +12,8 @@
 
   <div class="bg-light-blue">
     @yield('content')
+    {{-- Feedback --}}
+    <x-feedback />
   </div>
   
 

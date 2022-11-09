@@ -1,193 +1,50 @@
 <x-section-component class="bg-light-primary py-12">
-    <x-section-header-component title="Review Pasien Kami" hightlight="Pasien"></x-section-header-component>
+    <x-section-header-component title="Review Pengguna Kami" hightlight="Pengguna"></x-section-header-component>
     <div class="w-full overflow-x-hidden">
         <div id="review-slider-container"
             class="space-x-0 tems-center whitespace-nowrap transition-transform duration-500">
+           @foreach ($feedback as $item)
            <div class="inline-block w-full lg:w-1/3 relative h-[252px]">
             <div class="whitespace-normal absolute top-0 left-0 h-full w-full pr-6">    
                 <div class="flex flex-col justify-between w-full h-full bg-white py-5 px-7 rounded-xl">
                     <div class="space-y-5">
                         <div class="flex flex-row space-x-3">
                             <div class="w-12 h-12 rounded-full bg-primary overflow-hidden">
-                                <img class="w-full h-full object-cover object-center" src="https://i.pravatar.cc/300" alt="Picture">
+                                @if ($item->user->isDoctor())
+                                    <img class="w-full h-full object-cover object-center" src="{{ $item->user->doctor && $item->user->doctor->photo ? $item->user->doctor->photo : '/assets/images/default.jpg' }}" alt="Picture">
+                                    @else
+                                    <img class="w-full h-full object-cover object-center" src="{{ $item->user->client && $item->user->client->photo ? $item->user->client->photo : '/assets/images/default.jpg' }}" alt="Picture">
+                                @endif
                             </div>
                             <div class="flex flex-col">
-                                <h6 class="mb-content-date text-dark font-semibold">Juan Alma</h6>
-                                <p class="mb-content-paragraph text-dark-gray font-md">Happy Patient</p>
+                                <h6 class="mb-content-date text-dark font-semibold">{{ $item->user->name }}</h6>
+                                <p class="mb-content-paragraph text-dark-gray font-md">{{ $item->user->isDoctor() ? 'Smart Doctor' : 'Happy Patient' }}</p>
                             </div>
                         </div>
                         <p class="mb-content-paragraph text-dark font-md">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, est?
+                            {{ $item->comment }}
                         </p>
                     </div>
                     <div class="w-full flex flex-row justify-between">
-                        <span>rated 4.9/5</span>
+                        <span>rated {{$item->rating}}/5</span>
                         <div class="flex flex-row space-x-1">
-                            @for ($i = 0; $i < 6; $i++)
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_252_72)">
-                                <path d="M9 0.440308L11.751 6.11631L18 6.97956L13.452 11.3506L14.562 17.5598L9 14.5846L3.43725 17.5598L4.548 11.3506L0 6.97956L6.249 6.11631L9 0.440308Z" fill="#FFA959"/>
-                                </g>
-                                <defs>
-                                <clipPath id="clip0_252_72">
-                                <rect width="18" height="18" fill="white"/>
-                                </clipPath>
-                                </defs>
-                            </svg>    
+                            @for ($i = 0; $i < $item->rating; $i++)
+                            <div class="w-[18px] h-[18px]">
+                                <img class="w-full h-full object-cover object-center" src="/assets/icons/star.svg">
+                            </div>
+                            @endfor
+                            @for ($i = 0; $i < 5 - $item->rating; $i++)
+                            <div class="w-[18px] h-[18px]">
+                                <img class="w-full h-full object-cover object-center" src="/assets/icons/star-outline.svg">
+                            </div>
                             @endfor
                         </div>
                     </div>
                 </div>
             </div>
             </div>{{-- 
-           --}}<div class="inline-block w-full lg:w-1/3 relative h-[252px]">
-            <div class="whitespace-normal absolute top-0 left-0 h-full w-full pr-6">    
-                <div class="flex flex-col justify-between w-full h-full bg-white py-5 px-7 rounded-xl">
-                    <div class="space-y-5">
-                        <div class="flex flex-row space-x-3">
-                            <div class="w-12 h-12 rounded-full bg-primary overflow-hidden">
-                                <img class="w-full h-full object-cover object-center" src="https://i.pravatar.cc/300" alt="Picture">
-                            </div>
-                            <div class="flex flex-col">
-                                <h6 class="mb-content-date text-dark font-semibold">Juan Alma</h6>
-                                <p class="mb-content-paragraph text-dark-gray font-md">Happy Patient</p>
-                            </div>
-                        </div>
-                        <p class="mb-content-paragraph text-dark font-md">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, est?
-                        </p>
-                    </div>
-                    <div class="w-full flex flex-row justify-between">
-                        <span>rated 4.9/5</span>
-                        <div class="flex flex-row space-x-1">
-                            @for ($i = 0; $i < 6; $i++)
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_252_72)">
-                                <path d="M9 0.440308L11.751 6.11631L18 6.97956L13.452 11.3506L14.562 17.5598L9 14.5846L3.43725 17.5598L4.548 11.3506L0 6.97956L6.249 6.11631L9 0.440308Z" fill="#FFA959"/>
-                                </g>
-                                <defs>
-                                <clipPath id="clip0_252_72">
-                                <rect width="18" height="18" fill="white"/>
-                                </clipPath>
-                                </defs>
-                            </svg>    
-                            @endfor
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>{{-- 
-           --}}<div class="inline-block w-full lg:w-1/3 relative h-[252px]">
-            <div class="whitespace-normal absolute top-0 left-0 h-full w-full pr-6">    
-                <div class="flex flex-col justify-between w-full h-full bg-white py-5 px-7 rounded-xl">
-                    <div class="space-y-5">
-                        <div class="flex flex-row space-x-3">
-                            <div class="w-12 h-12 rounded-full bg-primary overflow-hidden">
-                                <img class="w-full h-full object-cover object-center" src="https://i.pravatar.cc/300" alt="Picture">
-                            </div>
-                            <div class="flex flex-col">
-                                <h6 class="mb-content-date text-dark font-semibold">Juan Alma</h6>
-                                <p class="mb-content-paragraph text-dark-gray font-md">Happy Patient</p>
-                            </div>
-                        </div>
-                        <p class="mb-content-paragraph text-dark font-md">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, est?
-                        </p>
-                    </div>
-                    <div class="w-full flex flex-row justify-between">
-                        <span>rated 4.9/5</span>
-                        <div class="flex flex-row space-x-1">
-                            @for ($i = 0; $i < 6; $i++)
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_252_72)">
-                                <path d="M9 0.440308L11.751 6.11631L18 6.97956L13.452 11.3506L14.562 17.5598L9 14.5846L3.43725 17.5598L4.548 11.3506L0 6.97956L6.249 6.11631L9 0.440308Z" fill="#FFA959"/>
-                                </g>
-                                <defs>
-                                <clipPath id="clip0_252_72">
-                                <rect width="18" height="18" fill="white"/>
-                                </clipPath>
-                                </defs>
-                            </svg>    
-                            @endfor
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>{{--
-        --}}<div class="inline-block w-full lg:w-1/3 relative h-[252px]">
-            <div class="whitespace-normal absolute top-0 left-0 h-full w-full pr-6">    
-                <div class="flex flex-col justify-between w-full h-full bg-white py-5 px-7 rounded-xl">
-                    <div class="space-y-5">
-                        <div class="flex flex-row space-x-3">
-                            <div class="w-12 h-12 rounded-full bg-primary overflow-hidden">
-                                <img class="w-full h-full object-cover object-center" src="https://i.pravatar.cc/300" alt="Picture">
-                            </div>
-                            <div class="flex flex-col">
-                                <h6 class="mb-content-date text-dark font-semibold">Juan Alma</h6>
-                                <p class="mb-content-paragraph text-dark-gray font-md">Happy Patient</p>
-                            </div>
-                        </div>
-                        <p class="mb-content-paragraph text-dark font-md">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, est?
-                        </p>
-                    </div>
-                    <div class="w-full flex flex-row justify-between">
-                        <span>rated 4.9/5</span>
-                        <div class="flex flex-row space-x-1">
-                            @for ($i = 0; $i < 6; $i++)
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_252_72)">
-                                <path d="M9 0.440308L11.751 6.11631L18 6.97956L13.452 11.3506L14.562 17.5598L9 14.5846L3.43725 17.5598L4.548 11.3506L0 6.97956L6.249 6.11631L9 0.440308Z" fill="#FFA959"/>
-                                </g>
-                                <defs>
-                                <clipPath id="clip0_252_72">
-                                <rect width="18" height="18" fill="white"/>
-                                </clipPath>
-                                </defs>
-                            </svg>    
-                            @endfor
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>{{-- 
-           --}}<div class="inline-block w-full lg:w-1/3 relative h-[252px]">
-            <div class="whitespace-normal absolute top-0 left-0 h-full w-full pr-6">    
-                <div class="flex flex-col justify-between w-full h-full bg-white py-5 px-7 rounded-xl">
-                    <div class="space-y-5">
-                        <div class="flex flex-row space-x-3">
-                            <div class="w-12 h-12 rounded-full bg-primary overflow-hidden">
-                                <img class="w-full h-full object-cover object-center" src="https://i.pravatar.cc/300" alt="Picture">
-                            </div>
-                            <div class="flex flex-col">
-                                <h6 class="mb-content-date text-dark font-semibold">Juan Alma</h6>
-                                <p class="mb-content-paragraph text-dark-gray font-md">Happy Patient</p>
-                            </div>
-                        </div>
-                        <p class="mb-content-paragraph text-dark font-md">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, est?
-                        </p>
-                    </div>
-                    <div class="w-full flex flex-row justify-between">
-                        <span>rated 4.9/5</span>
-                        <div class="flex flex-row space-x-1">
-                            @for ($i = 0; $i < 6; $i++)
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_252_72)">
-                                <path d="M9 0.440308L11.751 6.11631L18 6.97956L13.452 11.3506L14.562 17.5598L9 14.5846L3.43725 17.5598L4.548 11.3506L0 6.97956L6.249 6.11631L9 0.440308Z" fill="#FFA959"/>
-                                </g>
-                                <defs>
-                                <clipPath id="clip0_252_72">
-                                <rect width="18" height="18" fill="white"/>
-                                </clipPath>
-                                </defs>
-                            </svg>    
-                            @endfor
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
+           --}}
+           @endforeach
         </div>
     </div>
     <div class="flex flex-row justify-center items-center space-x-3 py-3">

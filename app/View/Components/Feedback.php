@@ -2,20 +2,20 @@
 
 namespace App\View\Components;
 
-use App\Models\Feedback;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
-class ReviewsComponent extends Component
+class Feedback extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public $feedback = null;
+    public $user = null;
     public function __construct()
     {
-        $this->feedback = Feedback::with('user')->latest()->take(5)->get();
+        $this->user = Auth::user();
     }
 
     /**
@@ -25,6 +25,6 @@ class ReviewsComponent extends Component
      */
     public function render()
     {
-        return view('components.reviews-component');
+        return view('components.feedback');
     }
 }
