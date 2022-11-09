@@ -1,5 +1,5 @@
 <x-section-component class="bg-light-primary py-12">
-    <x-section-header-component title="Review Pasien Kami" hightlight="Pasien"></x-section-header-component>
+    <x-section-header-component title="Review Pengguna Kami" hightlight="Pengguna"></x-section-header-component>
     <div class="w-full overflow-x-hidden">
         <div id="review-slider-container"
             class="space-x-0 tems-center whitespace-nowrap transition-transform duration-500">
