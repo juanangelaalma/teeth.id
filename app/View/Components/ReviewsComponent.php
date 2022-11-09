@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Feedback;
 use Illuminate\View\Component;
 
 class ReviewsComponent extends Component
@@ -11,9 +12,10 @@ class ReviewsComponent extends Component
      *
      * @return void
      */
+    public $feedback = null;
     public function __construct()
     {
-        //
+        $this->feedback = Feedback::with('user')->latest()->take(5)->get();
     }
 
     /**
