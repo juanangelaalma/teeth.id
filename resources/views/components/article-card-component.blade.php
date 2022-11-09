@@ -12,7 +12,7 @@
         <h4 class="text-dark mb-3 lg:mb-auto leading-6 lg:leading-auto text-xl lg:text-xl font-bold line-clamp-2">
             {{ $title }}</h4>
         <p class="text-light-gray leading-4 lg:leading-auto text-sm lg:text-md lg:leading-6 font-light line-clamp-2">
-            {{ strip_tags(substr(str_replace("&nbsp;", "", $body), 0, 130), null) }} ...</p>
+            {{ str_replace("&nbsp;", "", strip_tags(html_entity_decode(substr($body, 0, 200), null))) }} ...</p>
         <span class="hidden lg:block text-secondary text-btn-more">Learn more -></span>
     </div>
 </a>
