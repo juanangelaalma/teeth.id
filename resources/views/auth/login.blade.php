@@ -71,10 +71,8 @@
             </div>
 
         </form>
-        <div class="w-full mt-4">
-            <a href="{{ route('register') }}">
-                <x-secondary-button-link class="w-full">Register</x-secondary-button-link>
-            </a>
+        <div class="w-full mt-4 flex">
+            <x-secondary-button-link href="{{ route('register') }}" class="w-full text-center">Register</x-secondary-button-link>
         </div>
     </x-auth-card>
 </x-guest-layout>
