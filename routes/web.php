@@ -5,12 +5,20 @@ use App\Http\Controllers\Doctor\DoctorArticleController;
 use App\Http\Controllers\Doctor\DoctorDocumentController;
 use App\Http\Controllers\MediaUploadController;
 use App\Http\Controllers\User\ArticleController;
+use App\Http\Controllers\User\ForumController;
 use App\Http\Controllers\User\HomeController;
 use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('user.home');
 Route::get('beranda', [HomeController::class, 'index'])->name('user.home');
+
+Route::prefix('/forum')->group(function () {
+    Route::get('/', [ForumController::class, 'index'])->name('user.forum.index');
+    Route::get('/create', [ForumController::class, 'create'])->name('user.forum.create');
+    Route::post('/post', [ForumController::class, 'post'])->name('user.forum.post');
+    Route::get('/{slug}', [ForumController::class, 'show'])->name('user.forum.show');
+});
 
 Route::prefix('artikel')->group(function() {
     Route::get('/', [ArticleController::class, 'index'])->name('user.articles.index');

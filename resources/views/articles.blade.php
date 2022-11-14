@@ -17,8 +17,8 @@
         </x-section-component>
         @isset ($recommendation)
             <x-article-component :articlesRecommendation="$recommendation" no_title={{ true }} no_recommendation={{ true }} class="pb-0">
+            </x-article-component>
         @endisset
-        </x-article-component>
         <x-section-component class="section-padding bg-white">
             <div class="flex flex-col flex-wrap lg:flex-row pb-12 lg:py-12">
                 @foreach ($articles as $article)

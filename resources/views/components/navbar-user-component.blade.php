@@ -18,7 +18,7 @@ $userAuth = auth()->user();
                 <a href="">Behel Notification</a>
             </li>
             <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
-                <a href="">Ingin Bertanya?</a>
+                <a href="{{ route('user.forum.index')  }}">Ingin Bertanya?</a>
             </li>
             <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
                 <a href="">Buat Janji</a>
