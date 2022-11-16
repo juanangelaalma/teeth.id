@@ -14,13 +14,14 @@ class ForumController extends Controller
         // set time language
         Carbon::setLocale('in');
 
-        $questions = Forum::with(['user', 'doctor'])->latest()->get();
+        $questions = Forum::with(['user', 'doctor'])->orderBy('created_at', 'desc')->get();
         
         return view('forum.index', compact('questions'));
     }
 
-    public function read() {
-        return view('forum.read');
+    public function read($slug) {
+        $question = Forum::with(['doctor', 'user'])->where('slug', $slug)->firstOrFail();
+        return view('forum.read', compact('question'));
     }
 
     public function store(Request $request) {

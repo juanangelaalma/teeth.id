@@ -56,7 +56,7 @@
                         </span>
                         <select name="topic" id=""
                             class="block w-full mt-1 text-sm rounded-md @error('title') border-red-600 focus:border-red-400 @enderror focus:outline-none focus:shadow-outline-purple form-input">
-                            <option value="Sariawan" selected>Sariawan</option>
+                            <option value="Sariawan" selected="selected">Sariawan</option>
                             <option value="Gigi Berlubang">Gigi Berlubang</option>
                             <option value="Lainnya">Lainnya</option>
                         </select>

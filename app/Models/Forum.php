@@ -10,7 +10,7 @@ class Forum extends Model
 {
     use HasFactory;
     use Sluggable;
-    protected $fillable = ['title', 'slug', 'body', 'answer', 'doctor_id', 'user_id'];
+    protected $fillable = ['title', 'slug', 'body', 'topic', 'answer', 'doctor_id', 'user_id'];
 
     public function isAnswered() {
         return $this->answer != "";

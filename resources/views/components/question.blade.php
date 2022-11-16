@@ -1,6 +1,6 @@
 @props(['question'])
 
-<div class="py-5 border-b border-b-[#ECECEC]">
+<a href="{{ route('user.forum.read', $question->slug) }}" class="py-5 border-b border-b-[#ECECEC]">
     <div class="flex flex-row justify-between">
         <div class="flex justify-start">
             <div class="relative h-[60px]">
@@ -46,4 +46,4 @@
         </div>
     </div>
     <p class="text-content-paragraph text-dark-gray mt-3">{{  substr($question->body, 0, 200) }} {{ strlen($question->body) > 200 ? '...' : '' }} </p>
-</div>
+</a>
