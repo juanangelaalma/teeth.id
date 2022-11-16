@@ -42,4 +42,14 @@ class ForumController extends Controller
 
         return redirect()->route('user.forum.index')->with('success', 'Forum berhasil ditambahkan');
     }
+
+    public function answer($slug, Request $request) {
+        $forum = Forum::where('slug', $slug)->firstOrFail();
+        $forum->update([
+            'answer' => $request->answer,
+            'doctor_id' => auth()->user()->id,
+        ]);
+
+        return back();
+    }
 }

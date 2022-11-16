@@ -82,6 +82,10 @@
     @vite('resources/js/dropDownProfile.js')
     @vite('resources/js/navbar.js')
 
+    @if (isset($scripts))
+        {{ $scripts }}
+    @endif
+
     <script>
         const btnCreateQuestion = document.getElementById('btn-create-question');
         const formQuestion = document.getElementById('form-question');

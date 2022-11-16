@@ -17,6 +17,7 @@ Route::prefix('/forum')->group(function () {
     Route::get('/', [ForumController::class, 'index'])->name('user.forum.index');
     Route::post('/store', [ForumController::class, 'store'])->name('user.forum.store');
     Route::get('/{slug}', [ForumController::class, 'read'])->name('user.forum.read');
+    Route::post('/{slug}/answer', [ForumController::class, 'answer'])->name('user.forum.answer');
 });
 
 Route::prefix('artikel')->group(function() {
