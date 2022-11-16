@@ -22,4 +22,12 @@ class Forum extends Model
         // create slug from title
         return ['slug' => ['source' => 'title']];
     }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function doctor() {
+        return $this->belongsTo(Doctor::class);
+    }
 }
