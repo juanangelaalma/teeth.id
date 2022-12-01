@@ -1,5 +1,5 @@
 @php
-$userAuth = auth()->user();
+    $userAuth = auth()->user();
 @endphp
 <x-section-component {{ $attributes->merge(['class' => 'bg-white py-0']) }}>
     <nav id="navbar" class="flex flex-row w-full justify-between h-[86px] items-center">
@@ -7,25 +7,42 @@ $userAuth = auth()->user();
             <div class="flex">
                 <h1 class="text-primary">Teeth.id</h1>
             </div>
-            <ul
-                class="fixed h-screen top-0 right-0 flex flex-col space-y-10 pt-28 items-center w-[85%] translate-x-full glassmorphism-box z-20 lg:bg-transparent lg:border-none lg:translate-x-0 lg:pt-0 lg:w-auto lg:space-y-0 lg:h-auto lg:static lg:flex lg:flex-row lg:space-x-10 lg:pr-3">
-                <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
-                    <a href="{{ route('doctor.dashboard') }}">Dashboard</a>
-                </li>
-                <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
-                    <a href="{{ route('doctor.articles.index') }}">Artikel</a>
-                </li>
-                <li class="text-md flex items-center space-x-1 text-dark font-normal hover:text-primary transition-colors duration-200">
-                    <a href="">Janjian</a>
-                    <div class="w-2 h-2 rounded-full bg-red-400 inline-block"></div>
-                </li>
-                <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
-                    <a href="{{ route('doctor.documents.index') }}">Dokumen</a>
-                </li>
-                @if (!$userAuth)
-                    <x-main-button-link href="{{ route('login') }}"> Masuk </x-main-button-link>
-                @endif
-            </ul>
+            @if ($userAuth->isDoctor())
+                <ul
+                    class="fixed h-screen top-0 right-0 flex flex-col space-y-10 pt-28 items-center w-[85%] translate-x-full glassmorphism-box z-20 lg:bg-transparent lg:border-none lg:translate-x-0 lg:pt-0 lg:w-auto lg:space-y-0 lg:h-auto lg:static lg:flex lg:flex-row lg:space-x-10 lg:pr-3">
+                    <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
+                        <a href="{{ route('doctor.dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
+                        <a href="{{ route('doctor.articles.index') }}">Artikel</a>
+                    </li>
+                    <li
+                        class="text-md flex items-center space-x-1 text-dark font-normal hover:text-primary transition-colors duration-200">
+                        <a href="">Janjian</a>
+                        <div class="w-2 h-2 rounded-full bg-red-400 inline-block"></div>
+                    </li>
+                    <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
+                        <a href="{{ route('doctor.documents.index') }}">Dokumen</a>
+                    </li>
+                    @if (!$userAuth)
+                        <x-main-button-link href="{{ route('login') }}"> Masuk </x-main-button-link>
+                    @endif
+                </ul>
+            @else
+                {{-- Admin --}}
+                <ul
+                    class="fixed h-screen top-0 right-0 flex flex-col space-y-10 pt-28 items-center w-[85%] translate-x-full glassmorphism-box z-20 lg:bg-transparent lg:border-none lg:translate-x-0 lg:pt-0 lg:w-auto lg:space-y-0 lg:h-auto lg:static lg:flex lg:flex-row lg:space-x-10 lg:pr-3">
+                    <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
+                        <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
+                        <a href="{{ route('admin.documents.index') }}">Permintaan Verifikasi</a>
+                    </li>
+                    @if (!$userAuth)
+                        <x-main-button-link href="{{ route('login') }}"> Masuk </x-main-button-link>
+                    @endif
+                </ul>
+            @endif
         </div>
         @if ($userAuth)
             <!-- Settings Dropdown -->
@@ -60,7 +77,9 @@ $userAuth = auth()->user();
                                             src="{{ $userAuth->client && $userAuth->client->photo ? $userAuth->client->photo : '/assets/images/default.jpg' }}"
                                             alt="">
                                     </div>
-                                    <span class="text-sm hidden lg:block">{{ $userAuth->name }} </span>
+                                    <span
+                                        class="text-sm hidden lg:block">{{ $userAuth->isAdmin() ? 'Admin ' : '' }}{{ $userAuth->name }}
+                                    </span>
                                 @endif
                             </div>
                         </button>

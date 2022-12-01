@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDocumentController;
 use App\Http\Controllers\Doctor\DashboardController;
 use App\Http\Controllers\Doctor\DoctorArticleController;
 use App\Http\Controllers\Doctor\DoctorDocumentController;
@@ -46,6 +47,16 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
         Route::get('/', [DoctorDocumentController::class, 'index'])->name('doctor.documents.index');
         Route::post('/create', [DoctorDocumentController::class, 'create'])->name('doctor.documents.create');
     });
+});
+
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function() {
+    Route::get('documents', [AdminDocumentController::class, 'index'])->name('admin.documents.index');
+    Route::post('documents/{certification:id}/reject', [AdminDocumentController::class, 'reject'])->name('admin.documents.reject');
+    Route::post('documents/{certification:id}/approve', [AdminDocumentController::class, 'approve'])->name('admin.documents.approve');
+
+    Route::get('dashboard', function() {
+        return view('admin.dashboard.index');
+    })->name('admin.dashboard');
 });
 
 Route::post('upload', [MediaUploadController::class, 'upload']);

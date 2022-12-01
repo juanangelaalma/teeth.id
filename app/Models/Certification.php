@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Certification extends Model
 {
     use HasFactory;
+    use \Znck\Eloquent\Traits\BelongsToThrough;
+
     protected $fillable = [
         'doctor_id',
         'cv',
@@ -30,5 +32,9 @@ class Certification extends Model
 
     public function isRejected() {
         return $this->status === 'rejected';
+    }
+
+    public function user() {
+        return $this->belongsToThrough(User::class, Doctor::class);
     }
 }
