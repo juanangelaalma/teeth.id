@@ -15,14 +15,21 @@ $userAuth = auth()->user();
                 <a href="{{ route('user.articles.index') }}">Artikel</a>
             </li>
             <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
-                <a href="">Behel Notification</a>
+                <a href="{{ route('user.forum.index')  }}">{{ $userAuth && $userAuth->isDoctor() ? 'Lihat Forum' : 'Ingin Bertanya?' }}</a>
             </li>
-            <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
-                <a href="{{ route('user.forum.index')  }}">Ingin Bertanya?</a>
-            </li>
-            <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
-                <a href="">Buat Janji</a>
-            </li>
+            @if (!$userAuth)
+                <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
+                    <a href="">Buat Janji</a>
+                </li>
+            @endif
+            @if ($userAuth && $userAuth->isUser())
+                <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
+                    <a href="">Buat Janji</a>
+                </li>
+                <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
+                    <a href="">Pesanan Saya</a>
+                </li>
+            @endif
             @if (!$userAuth)
                 <x-main-button-link href="{{ route('login') }}"> Masuk </x-main-button-link>
             @endif
