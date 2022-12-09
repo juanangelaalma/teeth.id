@@ -67,7 +67,7 @@ $userAuth = auth()->user();
                                             src="{{ $userAuth->client && $userAuth->client->photo ? $userAuth->client->photo : '/assets/images/default.jpg' }}"
                                             alt="">
                                     </div>
-                                    <span class="text-sm hidden lg:block">{{ $userAuth->name }} </span>
+                                    <span class="text-sm hidden lg:block"> {{ $userAuth->isAdmin() ? 'Admin ' : '' }} {{ $userAuth->name }} </span>
                                 @endif
                             </div>
                         </button>
@@ -77,6 +77,11 @@ $userAuth = auth()->user();
                         <!-- Authentication -->
                         @if ($userAuth->isDoctor())
                             <x-dropdown-link href="{{ route('doctor.dashboard') }}">
+                                {{ __('Dashboard') }}
+                            </x-dropdown-link>
+                        @endif
+                        @if ($userAuth->isAdmin())
+                            <x-dropdown-link href="{{ route('admin.dashboard') }}">
                                 {{ __('Dashboard') }}
                             </x-dropdown-link>
                         @endif
