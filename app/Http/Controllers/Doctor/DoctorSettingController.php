@@ -18,6 +18,11 @@ class DoctorSettingController extends Controller
         return view('doctor.settings.profile', compact('user'));
     }
 
+    public function personal_data() {
+        $user = auth()->user()->load('doctor');
+        return view('doctor.settings.personal_data', compact('user'));
+    }
+
     public function update_profile(Request $request, User $user) {
         $request->validate([
             'name'  => 'required',
@@ -45,6 +50,19 @@ class DoctorSettingController extends Controller
 
         $user->name = $request->name;
         $user->doctor->description = $request->description;
+        $user->doctor->save();
+        $user->save();
+        return back();
+    }
+
+    public function update_personal_data(Request $request, User $user) {
+        $request->validate([
+            'birth_date' => 'required|date',
+            'sex' => 'required|in:1,0',
+        ]);
+
+        $user->doctor->birth_date = $request->birth_date;
+        $user->doctor->sex = $request->sex;
         $user->doctor->save();
         $user->save();
         return back();

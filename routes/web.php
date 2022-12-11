@@ -55,7 +55,7 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
         Route::get('/clinic', [DoctorSettingController::class, 'clinic'])->name('doctor.setting.clinic');
 
         Route::put('/profile/{user:id}/update', [DoctorSettingController::class, 'update_profile'])->name('doctor.setting.profile.update');
-        Route::put('/personal_data', [DoctorSettingController::class, 'update_personal_data'])->name('doctor.setting.personal_data.update');
+        Route::put('/personal_data/{user:id}/update', [DoctorSettingController::class, 'update_personal_data'])->name('doctor.setting.personal_data.update');
         Route::put('/clinic', [DoctorSettingController::class, 'update_clinic'])->name('doctor.setting.clinic.update');
     });
 });
