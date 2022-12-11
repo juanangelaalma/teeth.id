@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDocumentController;
 use App\Http\Controllers\Doctor\DashboardController;
 use App\Http\Controllers\Doctor\DoctorArticleController;
 use App\Http\Controllers\Doctor\DoctorDocumentController;
+use App\Http\Controllers\Doctor\DoctorSettingController;
 use App\Http\Controllers\MediaUploadController;
 use App\Http\Controllers\User\ArticleController;
 use App\Http\Controllers\User\ForumController;
@@ -46,6 +47,16 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
     Route::prefix('dokumen')->group(function() {
         Route::get('/', [DoctorDocumentController::class, 'index'])->name('doctor.documents.index');
         Route::post('/create', [DoctorDocumentController::class, 'create'])->name('doctor.documents.create');
+    });
+
+    Route::prefix('settings')->group(function() {
+        Route::get('/profile', [DoctorSettingController::class, 'profile'])->name('doctor.setting.profile');
+        Route::get('/personal_data', [DoctorSettingController::class, 'personal_data'])->name('doctor.setting.personal_data');
+        Route::get('/clinic', [DoctorSettingController::class, 'clinic'])->name('doctor.setting.clinic');
+
+        Route::put('/profile/{user:id}/update', [DoctorSettingController::class, 'update_profile'])->name('doctor.setting.profile.update');
+        Route::put('/personal_data', [DoctorSettingController::class, 'update_personal_data'])->name('doctor.setting.personal_data.update');
+        Route::put('/clinic', [DoctorSettingController::class, 'update_clinic'])->name('doctor.setting.clinic.update');
     });
 });
 
