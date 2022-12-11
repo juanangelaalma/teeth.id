@@ -9,19 +9,19 @@
         <div class="flex flex-col w-full lg:w-1/4">
             <ul class="space-y-6">
                 <li>
-                    <a class="flex items-center space-x-4" href="">
+                    <a class="flex items-center space-x-4" href="{{ route('doctor.setting.profile') }}">
                         <img src="{{ asset('assets/icons/profile.svg') }}" alt="">
                         <p>Profile</p>
                     </a>
                 </li>
                 <li>
-                    <a class="flex items-center space-x-4" href="">
+                    <a class="flex items-center space-x-4" href="{{ route('doctor.setting.personal_data') }}">
                         <img src="{{ asset('assets/icons/personal_data.svg') }}" alt="">
                         <p>Data Diri</p>
                     </a>
                 </li>
                 <li>
-                    <a class="flex items-center space-x-4" href="">
+                    <a class="flex items-center space-x-4" href="{{ route('doctor.setting.clinic') }}">
                         <img src="{{ asset('assets/icons/clinic.svg') }}" alt="">
                         <p>Klinik Saya</p>
                     </a>

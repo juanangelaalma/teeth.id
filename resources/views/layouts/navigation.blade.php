@@ -91,6 +91,9 @@
                             <x-dropdown-link href="{{ route('doctor.dashboard') }}">
                                 {{ __('Dashboard') }}
                             </x-dropdown-link>
+                            <x-dropdown-link href="{{ route('doctor.setting.profile') }}">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
                         @endif
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

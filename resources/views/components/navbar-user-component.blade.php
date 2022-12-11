@@ -79,6 +79,9 @@ $userAuth = auth()->user();
                             <x-dropdown-link href="{{ route('doctor.dashboard') }}">
                                 {{ __('Dashboard') }}
                             </x-dropdown-link>
+                            <x-dropdown-link href="{{ route('doctor.setting.profile') }}">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
                         @endif
                         @if ($userAuth->isAdmin())
                             <x-dropdown-link href="{{ route('admin.dashboard') }}">
