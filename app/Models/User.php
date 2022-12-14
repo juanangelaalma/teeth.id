@@ -85,4 +85,8 @@ class User extends Authenticatable
     public function certificates() {
         return $this->hasManyThrough(Certification::class, Doctor::class);
     }
+
+    public function clinic() {
+        return $this->hasOne(Clinic::class);
+    }
 }

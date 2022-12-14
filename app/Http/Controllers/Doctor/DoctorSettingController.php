@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Clinic;
 use App\Models\Doctor;
 use App\Models\User;
 use App\Services\ImageService;
@@ -65,6 +66,36 @@ class DoctorSettingController extends Controller
         $user->doctor->sex = $request->sex;
         $user->doctor->save();
         $user->save();
+        return back();
+    }
+
+    public function clinic() {
+        $clinic = auth()->user()->clinic;
+        return view('doctor.settings.clinic', compact('clinic'));
+    }
+
+    public function update_clinic(Request $request, $clinic_id) {
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'is_open' => 'required'
+        ]);
+
+        if($clinic_id == 'null') {
+            Clinic::create([
+                'name' => $request->name,
+                'address' => $request->address,
+                'is_open' => $request->is_open == 'true' ? true : false,
+                'user_id' => auth()->user()->id,
+            ]);
+        } else {
+            $clinic = Clinic::find($clinic_id);
+            $clinic->name = $request->name;
+            $clinic->address = $request->address;
+            $clinic->is_open = $request->is_open == 'true' ? true : false;
+            $clinic->save();
+        }
+
         return back();
     }
 }
