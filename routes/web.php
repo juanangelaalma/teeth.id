@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDocumentController;
+use App\Http\Controllers\BuatJanjiController;
 use App\Http\Controllers\Doctor\DashboardController;
 use App\Http\Controllers\Doctor\DoctorArticleController;
 use App\Http\Controllers\Doctor\DoctorDocumentController;
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('user.home');
 Route::get('beranda', [HomeController::class, 'index'])->name('user.home');
+
+Route::prefix('/buat-janji')->group(function() {
+    Route::get('/', [BuatJanjiController::class, 'index']);
+});
 
 Route::prefix('/forum')->group(function () {
     Route::get('/', [ForumController::class, 'index'])->name('user.forum.index');
