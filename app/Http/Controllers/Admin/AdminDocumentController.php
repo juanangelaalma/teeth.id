@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Certification;
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 
 class AdminDocumentController extends Controller
@@ -26,6 +27,9 @@ class AdminDocumentController extends Controller
     {
         $certification->update([
             'status' => 'accepted'
+        ]);
+        $certification->doctor()->update([
+            'is_verified' => true
         ]);
         return redirect()->back();
     }
