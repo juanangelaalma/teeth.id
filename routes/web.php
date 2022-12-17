@@ -17,7 +17,8 @@ Route::get('/', [HomeController::class, 'index'])->name('user.home');
 Route::get('beranda', [HomeController::class, 'index'])->name('user.home');
 
 Route::prefix('/buat-janji')->group(function() {
-    Route::get('/', [BuatJanjiController::class, 'index']);
+    Route::get('/', [BuatJanjiController::class, 'index'])->name('buat_janji.index');
+    Route::get('/{doctor_id}/pilih-jadwal', [BuatJanjiController::class, 'pilih_jadwal'])->name('buat_janji.pilih_jadwal');
 });
 
 Route::prefix('/forum')->group(function () {

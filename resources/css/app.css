@@ -91,6 +91,20 @@ input:checked ~ .dot-wrapper {
     border-color: #0061FF;
 }
 
+.filter-switch label {
+  cursor: pointer;
+}
+
+.filter-switch-item input:checked + label {
+  color: inherit;
+  border: 1px solid #0061FF;
+}
+
+.filter-switch-item input:not(:checked) + label {
+  --bg-opacity: 0;
+}
+
+
 @keyframes show-input-question {
     0% {
         opacity: 0;

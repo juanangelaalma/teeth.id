@@ -118,7 +118,7 @@
                 </div>
                 <hr class="text-gray-100 w-full my-6">
                 <div class="flex flex-col md:flex-row">
-                    <div class="w-full overflow-hidden md:h-[140px] md:w-[140px] md:rounded-md mb-3 mx-auto">
+                    <div class="w-full overflow-hidden md:h-[140px] md:w-[140px] rounded-md mb-3 mx-auto">
                         <img class="w-full h-full object-cover object-center"
                             src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg"
                             alt="">
@@ -152,8 +152,7 @@
                                 <p class="text-content-paragraph font-medium text-dark">Biaya Konsultasi</p>
                                 <p class="text-content-paragraph font-semibold text-primary">Rp150.000</p>
                             </div>
-                            <x-main-button-link class="text-center mt-2 bg-secondary shadow-none">Buat janji
-                            </x-main-button-link>
+                            <x-main-button-link href="/" class="text-center mt-2 bg-secondary shadow-none">Buat janji</x-main-button-link>
                         </div>
                     </div>
                 </div>
