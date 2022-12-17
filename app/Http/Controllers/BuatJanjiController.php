@@ -13,4 +13,8 @@ class BuatJanjiController extends Controller
     public function pilih_jadwal() {
         return view('buat_janji.pilih_jadwal');
     }
+
+    public function ringkasan_pesanan() {
+        return view('buat_janji.ringkasan_pesanan');
+    }
 }

@@ -47,7 +47,7 @@
             </div>
             <div class="w-full lg:w-2/5">
                 <div class="w-full p-4 border border-gray-100 rounded-lg">
-                    <h6 class="font-bold text-content-date text-dark mt-3">Tentang dokter</h6>
+                    <h6 class="font-bold text-content-date text-dark">Tentang dokter</h6>
                     <p class="text-light-gray">dr. PIC Rapid Test</p>
                     <hr class="text-gray-100 w-full my-6">
                     <div class="flex flex-row items-center justify-start">
