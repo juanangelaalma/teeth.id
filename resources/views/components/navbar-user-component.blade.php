@@ -15,14 +15,21 @@ $userAuth = auth()->user();
                 <a href="{{ route('user.articles.index') }}">Artikel</a>
             </li>
             <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
-                <a href="">Behel Notification</a>
+                <a href="{{ route('user.forum.index')  }}">{{ $userAuth && $userAuth->isDoctor() ? 'Lihat Forum' : 'Ingin Bertanya?' }}</a>
             </li>
-            <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
-                <a href="{{ route('user.forum.index')  }}">Ingin Bertanya?</a>
-            </li>
-            <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
-                <a href="">Buat Janji</a>
-            </li>
+            @if (!$userAuth)
+                <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
+                    <a href="">Buat Janji</a>
+                </li>
+            @endif
+            @if ($userAuth && $userAuth->isUser())
+                <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
+                    <a href="">Buat Janji</a>
+                </li>
+                <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
+                    <a href="">Pesanan Saya</a>
+                </li>
+            @endif
             @if (!$userAuth)
                 <x-main-button-link href="{{ route('login') }}"> Masuk </x-main-button-link>
             @endif
@@ -60,7 +67,7 @@ $userAuth = auth()->user();
                                             src="{{ $userAuth->client && $userAuth->client->photo ? $userAuth->client->photo : '/assets/images/default.jpg' }}"
                                             alt="">
                                     </div>
-                                    <span class="text-sm hidden lg:block">{{ $userAuth->name }} </span>
+                                    <span class="text-sm hidden lg:block"> {{ $userAuth->isAdmin() ? 'Admin ' : '' }} {{ $userAuth->name }} </span>
                                 @endif
                             </div>
                         </button>
@@ -70,6 +77,14 @@ $userAuth = auth()->user();
                         <!-- Authentication -->
                         @if ($userAuth->isDoctor())
                             <x-dropdown-link href="{{ route('doctor.dashboard') }}">
+                                {{ __('Dashboard') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link href="{{ route('doctor.setting.profile') }}">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+                        @endif
+                        @if ($userAuth->isAdmin())
+                            <x-dropdown-link href="{{ route('admin.dashboard') }}">
                                 {{ __('Dashboard') }}
                             </x-dropdown-link>
                         @endif

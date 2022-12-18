@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->date('birth_date')->nullable();
             $table->text('photo')->nullable();
-            $table->boolean('sex')->default(true); // 1 is men, 2 is women
+            $table->boolean('sex')->default(null)->nullable(); // 1 is men, 2 is women
             $table->text('description')->nullable();
             $table->boolean('is_verified')->default(false);
             $table->enum('status', ['active', 'blocked'])->default('active');
