@@ -28,4 +28,8 @@ class Doctor extends Model
     public function articles() {
         return $this->hasMany(Article::class);
     }
+
+    public function forums() {
+        return $this->hasMany(Forum::class);
+    }
 }

@@ -1,27 +1,31 @@
-<div class="py-5 border-b border-b-[#ECECEC]">
+@props(['question'])
+
+<a href="{{ route('user.forum.read', $question->slug) }}" class="py-5 border-b border-b-[#ECECEC]">
     <div class="flex flex-row justify-between">
         <div class="flex justify-start">
             <div class="relative h-[60px]">
-                <div
-                    class="h-[60px] w-[60px] rounded-full bg-[#A4D0C7] flex justify-center items-center">
-                    <p class="text-white text-[25px]">D</p>
+                <div class="h-[60px] w-[60px] rounded-full bg-[#A4D0C7] flex justify-center items-center">
+                    <p class="text-white text-[25px] capitalize">{{ $question->user->name[0] }}</p>
                 </div>
-                <div
-                    class="w-[42px] h-[42px] overflow-hidden rounded-full bg-dark absolute -bottom-1 -right-6">
-                    <img class="w-full h-full object-cover object-center"
-                        src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80"
-                        alt="">
-                </div>
+                @if ($question->doctor_id)
+                    <div class="w-[42px] h-[42px] overflow-hidden rounded-full bg-dark absolute -bottom-1 -right-6">
+                        <img class="w-full h-full object-cover object-center"
+                            src="{{ $question->doctor_id && $question->doctor->photo ? $question->doctor->photo : '/assets/images/default.jpg'  }}"
+                            alt="">
+                    </div>
+                @endif
             </div>
-            <div class="flex flex-col pl-11">
-                <h1 class="text-dark-gray text-paragraph">Batuk tidak sembuh-sembuh harus bagaimana? </h1>
-                <p class="text-sm text-light-gray">oleh: Dodik Sudrajat</p>
-                <p class="text-sm text-primary">dijawab oleh dr. Juan Angela Alma S.kom</p>
+            <div class="flex flex-col {{ $question->doctor_id ? 'pl-11' : 'pl-4' }}">
+                <h1 class="text-dark-gray text-paragraph">{{ $question->title }}</h1>
+                <p class="text-sm text-light-gray">oleh: {{ $question->user->name }}</p>
+                @if ($question->doctor_id)
+                    <p class="text-sm text-primary">dijawab oleh dr. {{ $question->doctor->user->name }}</p>
+                @endif
             </div>
         </div>
         <div class="hidden md:flex flex-col justify-start items-end">
             <div class="flex flex-row justify-end items-center space-x-2">
-                <p class="text-sm text-primary text-normal">1 balasan</p>
+                <p class="text-sm text-primary text-normal">{{ $question->isAnswered() ? 1 : 0 }} balasan</p>
                 <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -30,7 +34,8 @@
                 </svg>
             </div>
             <div class="flex flex-row justify-end items-center space-x-2">
-                <p class="text-sm text-light-gray text-normal">9 jam yang lalu</p>
+                {{-- <p class="text-sm text-light-gray text-normal">9 jam yang lalu</p> --}}
+                <p class="text-sm text-light-gray text-normal">{{ $question->created_at->diffForHumans() }}</p>
                 <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -40,5 +45,5 @@
             </div>
         </div>
     </div>
-    <p class="text-content-paragraph text-dark-gray mt-3">Dokter, wajah saya dari jaman remaja jerawatan terus hilang timbul dok. dan banyak muncul di area dahi dan dagu. jerawat saya tipe jerawat nanah dan kecil-kecil dok. saya bingung pakai obat apalagi...</p>
-</div>
+    <p class="text-content-paragraph text-dark-gray mt-3">{{  substr($question->body, 0, 200) }} {{ strlen($question->body) > 200 ? '...' : '' }} </p>
+</a>

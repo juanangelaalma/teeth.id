@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDocumentController;
+use App\Http\Controllers\BuatJanjiController;
 use App\Http\Controllers\Doctor\DashboardController;
 use App\Http\Controllers\Doctor\DoctorArticleController;
 use App\Http\Controllers\Doctor\DoctorDocumentController;
+use App\Http\Controllers\Doctor\DoctorSettingController;
 use App\Http\Controllers\MediaUploadController;
 use App\Http\Controllers\User\ArticleController;
 use App\Http\Controllers\User\ForumController;
@@ -13,11 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('user.home');
 Route::get('beranda', [HomeController::class, 'index'])->name('user.home');
 
+Route::prefix('/buat-janji')->group(function() {
+    Route::get('/', [BuatJanjiController::class, 'index'])->name('buat_janji.index');
+    Route::get('/{doctor_id}/pilih-jadwal', [BuatJanjiController::class, 'pilih_jadwal'])->name('buat_janji.pilih_jadwal');
+    Route::get('/ringkasan-pesanan', [BuatJanjiController::class, 'ringkasan_pesanan'])->name('buat_janji.ringkasan_pesanan');
+});
+
 Route::prefix('/forum')->group(function () {
     Route::get('/', [ForumController::class, 'index'])->name('user.forum.index');
-    Route::get('/create', [ForumController::class, 'create'])->name('user.forum.create');
-    Route::post('/post', [ForumController::class, 'post'])->name('user.forum.post');
+    Route::post('/store', [ForumController::class, 'store'])->name('user.forum.store');
     Route::get('/{slug}', [ForumController::class, 'read'])->name('user.forum.read');
+    Route::post('/{slug}/answer', [ForumController::class, 'answer'])->name('user.forum.answer');
 });
 
 Route::prefix('artikel')->group(function() {
@@ -46,6 +55,26 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
         Route::get('/', [DoctorDocumentController::class, 'index'])->name('doctor.documents.index');
         Route::post('/create', [DoctorDocumentController::class, 'create'])->name('doctor.documents.create');
     });
+
+    Route::prefix('settings')->group(function() {
+        Route::get('/profile', [DoctorSettingController::class, 'profile'])->name('doctor.setting.profile');
+        Route::get('/personal_data', [DoctorSettingController::class, 'personal_data'])->name('doctor.setting.personal_data');
+        Route::get('/clinic', [DoctorSettingController::class, 'clinic'])->name('doctor.setting.clinic');
+
+        Route::put('/profile/{user:id}/update', [DoctorSettingController::class, 'update_profile'])->name('doctor.setting.profile.update');
+        Route::put('/personal_data/{user:id}/update', [DoctorSettingController::class, 'update_personal_data'])->name('doctor.setting.personal_data.update');
+        Route::put('/clinic/{clinic_id}/update', [DoctorSettingController::class, 'update_clinic'])->name('doctor.setting.clinic_update');
+    });
+});
+
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function() {
+    Route::get('documents', [AdminDocumentController::class, 'index'])->name('admin.documents.index');
+    Route::post('documents/{certification:id}/reject', [AdminDocumentController::class, 'reject'])->name('admin.documents.reject');
+    Route::post('documents/{certification:id}/approve', [AdminDocumentController::class, 'approve'])->name('admin.documents.approve');
+
+    Route::get('dashboard', function() {
+        return view('admin.dashboard.index');
+    })->name('admin.dashboard');
 });
 
 Route::post('upload', [MediaUploadController::class, 'upload']);
