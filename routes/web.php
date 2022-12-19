@@ -79,6 +79,9 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
     
     Route::prefix('clinic')->group(function() {
         Route::get('/', [DoctorClinicController::class, 'index'])->name('doctor.clinic.index');
+        Route::post('/create_clinic_schedule', [DoctorClinicController::class, 'create_clinic_schedule'])->name('doctor.clinic.create_clinic_schedule');
+        Route::delete('/{clinic_schedule_id}/delete_clinic_schedule', [DoctorClinicController::class, 'delete_clinic_schedule'])->name('doctor.clinic.delete_clinic_schedule');
+        Route::delete('/{schedule_hour_id}/delete_schedule_hour', [DoctorClinicController::class, 'delete_schedule_hour'])->name('doctor.clinic.delete_schedule_hour');
     });
 });
 

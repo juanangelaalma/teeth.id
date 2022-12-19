@@ -13,9 +13,9 @@
                     <div class="w-1/5">
                         <div class="h-12 w-12 rounded-full overflow-hidden bg-black">
                             @if ($user->isDoctor())
-                                <img src="{{ $user->doctor && $user->doctor->photo ? $user->doctor->photo : '/assets/images/default.jpg' }}" alt="">
+                                <img class="object-cover object-center w-full h-full" src="{{ $user->doctor && $user->doctor->photo ? $user->doctor->photo : '/assets/images/default.jpg' }}" alt="">
                             @else
-                                <img src="{{ $user->client && $user->client->photo ? $user->client->photo : '/assets/images/default.jpg' }}" alt="">
+                                <img class="object-cover object-center w-full h-full" src="{{ $user->client && $user->client->photo ? $user->client->photo : '/assets/images/default.jpg' }}" alt="">
                             @endif
                         </div>
                     </div>

@@ -6,7 +6,8 @@
     </x-slot>
     <x-dashboard-section-card title="Atur jadwal klinik anda">
         <x-success-alert />
-        <form action="">
+        <form action="{{ route('doctor.clinic.create_clinic_schedule') }}" method="POST">
+            @csrf
             <div class="flex flex-row space-x-3">
                 <label class="block flex-1 text-sm w-full md:w-1/2 md:pr-2">
                     <span class="text-dark mb-1">
@@ -43,7 +44,7 @@
                     <x-input-error :messages="$errors->get('day')" class="mt-2" />
                 </label>
                 <div class="flex items-end">
-                    <x-main-button>Simpan</x-main-button>
+                    <x-main-button type="submit">Simpan</x-main-button>
                 </div>
             </div>
         </form>
