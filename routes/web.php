@@ -7,6 +7,7 @@ use App\Http\Controllers\Doctor\DoctorArticleController;
 use App\Http\Controllers\Doctor\DoctorDocumentController;
 use App\Http\Controllers\Doctor\DoctorSettingController;
 use App\Http\Controllers\MediaUploadController;
+use App\Http\Controllers\PesananController;
 use App\Http\Controllers\User\ArticleController;
 use App\Http\Controllers\User\ForumController;
 use App\Http\Controllers\User\HomeController;
@@ -15,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('user.home');
 Route::get('beranda', [HomeController::class, 'index'])->name('user.home');
+Route::prefix('pesanan')->group(function() {
+    Route::get('/', [PesananController::class, 'index'])->name('user.pesanan.index');
+});
 
 Route::prefix('/buat-janji')->group(function() {
     Route::get('/', [BuatJanjiController::class, 'index'])->name('buat_janji.index');
