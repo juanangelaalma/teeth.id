@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDocumentController;
 use App\Http\Controllers\BuatJanjiController;
 use App\Http\Controllers\Doctor\DashboardController;
 use App\Http\Controllers\Doctor\DoctorArticleController;
+use App\Http\Controllers\Doctor\DoctorClinicController;
 use App\Http\Controllers\Doctor\DoctorDocumentController;
 use App\Http\Controllers\Doctor\DoctorOrderController;
 use App\Http\Controllers\Doctor\DoctorSettingController;
@@ -74,6 +75,10 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
 
     Route::prefix('order')->group(function() {
         Route::get('/', [DoctorOrderController::class, 'index'])->name('doctor.order.index');
+    });
+    
+    Route::prefix('clinic')->group(function() {
+        Route::get('/', [DoctorClinicController::class, 'index'])->name('doctor.clinic.index');
     });
 });
 
