@@ -5,6 +5,7 @@ use App\Http\Controllers\BuatJanjiController;
 use App\Http\Controllers\Doctor\DashboardController;
 use App\Http\Controllers\Doctor\DoctorArticleController;
 use App\Http\Controllers\Doctor\DoctorDocumentController;
+use App\Http\Controllers\Doctor\DoctorOrderController;
 use App\Http\Controllers\Doctor\DoctorSettingController;
 use App\Http\Controllers\MediaUploadController;
 use App\Http\Controllers\PesananController;
@@ -69,6 +70,10 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
         Route::put('/profile/{user:id}/update', [DoctorSettingController::class, 'update_profile'])->name('doctor.setting.profile.update');
         Route::put('/personal_data/{user:id}/update', [DoctorSettingController::class, 'update_personal_data'])->name('doctor.setting.personal_data.update');
         Route::put('/clinic/{clinic_id}/update', [DoctorSettingController::class, 'update_clinic'])->name('doctor.setting.clinic_update');
+    });
+
+    Route::prefix('order')->group(function() {
+        Route::get('/', [DoctorOrderController::class, 'index'])->name('doctor.order.index');
     });
 });
 
