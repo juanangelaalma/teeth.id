@@ -4,9 +4,12 @@ use App\Http\Controllers\Admin\AdminDocumentController;
 use App\Http\Controllers\BuatJanjiController;
 use App\Http\Controllers\Doctor\DashboardController;
 use App\Http\Controllers\Doctor\DoctorArticleController;
+use App\Http\Controllers\Doctor\DoctorClinicController;
 use App\Http\Controllers\Doctor\DoctorDocumentController;
+use App\Http\Controllers\Doctor\DoctorOrderController;
 use App\Http\Controllers\Doctor\DoctorSettingController;
 use App\Http\Controllers\MediaUploadController;
+use App\Http\Controllers\PesananController;
 use App\Http\Controllers\User\ArticleController;
 use App\Http\Controllers\User\ForumController;
 use App\Http\Controllers\User\HomeController;
@@ -15,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('user.home');
 Route::get('beranda', [HomeController::class, 'index'])->name('user.home');
+Route::prefix('pesanan')->group(function() {
+    Route::get('/', [PesananController::class, 'index'])->name('user.pesanan.index');
+    Route::get('/cetak-invoice', [PesananController::class, 'cetak_invoice'])->name('user.pesanan.cetak_invoice');
+});
 
 Route::prefix('/buat-janji')->group(function() {
     Route::get('/', [BuatJanjiController::class, 'index'])->name('buat_janji.index');
@@ -64,6 +71,14 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
         Route::put('/profile/{user:id}/update', [DoctorSettingController::class, 'update_profile'])->name('doctor.setting.profile.update');
         Route::put('/personal_data/{user:id}/update', [DoctorSettingController::class, 'update_personal_data'])->name('doctor.setting.personal_data.update');
         Route::put('/clinic/{clinic_id}/update', [DoctorSettingController::class, 'update_clinic'])->name('doctor.setting.clinic_update');
+    });
+
+    Route::prefix('order')->group(function() {
+        Route::get('/', [DoctorOrderController::class, 'index'])->name('doctor.order.index');
+    });
+    
+    Route::prefix('clinic')->group(function() {
+        Route::get('/', [DoctorClinicController::class, 'index'])->name('doctor.clinic.index');
     });
 });
 

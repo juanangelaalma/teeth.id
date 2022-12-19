@@ -18,8 +18,12 @@
                     </li>
                     <li
                         class="text-md flex items-center space-x-1 text-dark font-normal hover:text-primary transition-colors duration-200">
-                        <a href="">Janjian</a>
+                        <a href="{{ route('doctor.order.index') }}">Janjian</a>
                         <div class="w-2 h-2 rounded-full bg-red-400 inline-block"></div>
+                    </li>
+                    <li
+                        class="text-md flex items-center space-x-1 text-dark font-normal hover:text-primary transition-colors duration-200">
+                        <a href="{{ route('doctor.clinic.index') }}">Klinik</a>
                     </li>
                     <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
                         <a href="{{ route('doctor.documents.index') }}">Dokumen</a>

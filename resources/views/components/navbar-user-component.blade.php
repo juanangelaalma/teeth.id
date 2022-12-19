@@ -19,15 +19,15 @@ $userAuth = auth()->user();
             </li>
             @if (!$userAuth)
                 <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
-                    <a href="">Buat Janji</a>
+                    <a href="{{ route('buat_janji.index') }}">Buat Janji</a>
                 </li>
             @endif
             @if ($userAuth && $userAuth->isUser())
                 <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
-                    <a href="">Buat Janji</a>
+                    <a href="{{ route('buat_janji.index') }}">Buat Janji</a>
                 </li>
                 <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">
-                    <a href="">Pesanan Saya</a>
+                    <a href="{{ route('user.pesanan.index') }}">Pesanan Saya</a>
                 </li>
             @endif
             @if (!$userAuth)
