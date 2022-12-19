@@ -18,6 +18,7 @@ Route::get('/', [HomeController::class, 'index'])->name('user.home');
 Route::get('beranda', [HomeController::class, 'index'])->name('user.home');
 Route::prefix('pesanan')->group(function() {
     Route::get('/', [PesananController::class, 'index'])->name('user.pesanan.index');
+    Route::get('/cetak-invoice', [PesananController::class, 'cetak_invoice'])->name('user.pesanan.cetak_invoice');
 });
 
 Route::prefix('/buat-janji')->group(function() {
