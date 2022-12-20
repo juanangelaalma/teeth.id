@@ -12,3 +12,16 @@ function timestamp_to_date($timestamp) {
 // function get_diff_timestap($timestamp) {
 //   Carbon::
 // }
+
+function day_english_to_indo($day) {
+  $days = [
+    'monday' => 'Senin',
+    'tuesday' => 'Selasa',
+    'wednesday' => 'Rabu',
+    'thursday' => 'Kamis',
+    'friday' => 'Jumat',
+    'saturday' => 'Sabtu',
+    'sunday' => 'Minggu',
+  ];
+  return $days[$day];
+}

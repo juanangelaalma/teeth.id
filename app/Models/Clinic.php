@@ -21,6 +21,10 @@ class Clinic extends Model
         return $this->hasMany(ClinicSchedule::class);
     }
 
+    public function schedule_hours() {
+        return $this->hasManyThrough(ScheduleHour::class, ClinicSchedule::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

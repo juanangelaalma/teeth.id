@@ -6,6 +6,7 @@
     </x-slot>
     <x-dashboard-section-card title="Atur jadwal klinik anda">
         <x-success-alert />
+        @if ($hasClinic)
         <form action="{{ route('doctor.clinic.create_clinic_schedule') }}" method="POST">
             @csrf
             <div class="flex flex-row space-x-3">
@@ -51,25 +52,24 @@
 
         <div class="flex flex-col mt-8">
             <div class="space-y-5">
+                @if ($clinic)
+                @foreach ($clinic->schedules as $schedule)
                 <div>
-                    <h6>Senin</h6>
+                    <h6>{{ day_english_to_indo($schedule->day) }}</h6>
                     <div class="flex flex-row space-x-3 flex-wrap">
-                        <div class="bg-primary-light text-dark-gray px-2 py-1 text-sm">09:00</div>
-                        <div class="bg-primary-light text-dark-gray px-2 py-1 text-sm">09:00</div>
-                        <div class="bg-primary-light text-dark-gray px-2 py-1 text-sm">09:00</div>
-                        <div class="bg-primary-light text-dark-gray px-2 py-1 text-sm">09:00</div>
+                        @foreach ($schedule->hours as $hour)
+                            <div class="bg-primary-light text-dark-gray px-2 py-1 text-sm">{{ $hour->hour }}</div>
+                        @endforeach
                     </div>
                 </div>
-                <div>
-                    <h6>Senin</h6>
-                    <div class="flex flex-row space-x-3 flex-wrap">
-                        <div class="bg-primary-light text-dark-gray px-2 py-1 text-sm">09:00</div>
-                        <div class="bg-primary-light text-dark-gray px-2 py-1 text-sm">09:00</div>
-                        <div class="bg-primary-light text-dark-gray px-2 py-1 text-sm">09:00</div>
-                        <div class="bg-primary-light text-dark-gray px-2 py-1 text-sm">09:00</div>
-                    </div>
-                </div>
+                @endforeach
+                @endif
             </div>
         </div>
+        @else
+        <div class="w-full flex items-center justify-center">
+            <p>Mohon lengkapi data klinik anda <a href="{{ route('doctor.setting.clinic') }}" class="underline text-primary">disini</a></p>
+        </div>
+        @endif
     </x-dashboard-section-card>
 </x-app-layout>
