@@ -14,6 +14,8 @@ class Clinic extends Model
         'name',
         'address',
         'is_open',
+        'price',
+        'city_code'
     ];
 
     public function schedules()

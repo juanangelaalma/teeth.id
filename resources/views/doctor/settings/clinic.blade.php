@@ -31,6 +31,28 @@
             </label>
             <label class="block text-sm w-full md:w-2/3 md:pr-2">
                 <span class="text-dark mb-1 font-bold">
+                    Biaya per kunjungan
+                </span>
+                <input
+                    class="block w-full mt-1 text-sm rounded-md @error('price') border-red-600 focus:border-red-400 @enderror focus:outline-none focus:shadow-outline-purple form-input"
+                    placeholder="Masukkan alamat klinik" type="number" name="price"
+                    value="{{ $clinic ? $clinic->price : '' }}" />
+                <x-input-error :messages="$errors->get('price')" class="mt-2" />
+            </label>
+            <label class="block text-sm w-full md:w-2/3 md:pr-2">
+                <span class="text-dark mb-1 font-bold">
+                    Kota klinik
+                </span>
+                <select name="city" class="block w-full mt-1 text-sm rounded-md @error('city') border-red-600 focus:border-red-400 @enderror focus:outline-none focus:shadow-outline-purple form-input" id="">
+                    <option value="">Kota</option>
+                    @foreach ($cities as $city)
+                    <option value="{{ $city->code }}" {{ $clinic ? ($city->code === $clinic->city_code ? 'selected' : '') : '' }}>{{ $city->name }}</option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('price')" class="mt-2" />
+            </label>
+            <label class="block text-sm w-full md:w-2/3 md:pr-2">
+                <span class="text-dark mb-1 font-bold">
                     Status
                 </span>
                 <!-- Toggle B -->

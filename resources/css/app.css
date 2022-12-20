@@ -104,6 +104,17 @@ input:checked ~ .dot-wrapper {
   --bg-opacity: 0;
 }
 
+select .input-select-search {
+  /* for Firefox */
+  -moz-appearance: none;
+  /* for Chrome */
+  -webkit-appearance: none;
+}
+
+/* For IE10 */
+select .input-select-search::-ms-expand {
+  display: none;
+}
 
 @keyframes show-input-question {
     0% {

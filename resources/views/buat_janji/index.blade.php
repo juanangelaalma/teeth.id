@@ -6,11 +6,11 @@
         <div class="relative z-10">
             <div class="w-full relative bg-primary-light py-12 section-padding md:h-[250px] mx-auto flex">
                 <div
-                    class="flex flex-col md:absolute w-full md:px-[7rem] top-[50%] md:translate-y-[-50%] md:left-[50%] md:translate-x-[-50%] max-w-[1600px] z-20">
+                    class="relative flex flex-col md:absolute w-full md:px-[7rem] top-[50%] md:translate-y-[-50%] md:left-[50%] md:translate-x-[-50%] max-w-[1600px] z-20">
                     <h1 class="text-section-paragraph font-bold text-dark">Buat janji</h1>
                     <p class="text-[16px] text-light-gray">Buat janji dengan dokter pilihan kamu jauh lebih mudah dan
                         terpercaya</p>
-                    <form class="flex w-full flex-col md:flex-row my-8 space-y-3 md:space-y-0 rounded-md lg:overflow-hidden">
+                    <form method="GET" action="{{ route('buat_janji.search') }}" class="flex w-full h-11 flex-col md:flex-row my-8 space-y-3 md:space-y-0 rounded-md lg:overflow-hidden">
                         {{-- Search Lokasi --}}
                         <div class="relative marker:text-gray-600 flex-1 focus-within:text-gray-400">
                             <span class="absolute top-[50%] translate-y-[-50%] flex items-center pl-3">
@@ -39,9 +39,12 @@
                                     </defs>
                                 </svg>
                             </span>
-                            <input type="text" name="q"
-                                class="text-sm w-full py-3 border-none outline-none focus:border-transparent focus:ring-0 text-dark pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
-                                placeholder="Semua lokasi" autocomplete="off">
+                            <select name="location" class="input-select-search text-sm w-full py-3 border-none appearance-none outline-none focus:border-transparent focus:ring-0 text-dark pl-10 focus:outline-none focus:bg-white focus:text-gray-900" id="">
+                                <option value="">Semua lokasi</option>
+                                @foreach ($cities as $city)
+                                <option value="{{ $city->code }}">{{ $city->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         {{-- Search nama --}}
@@ -56,7 +59,7 @@
                                         stroke-linejoin="round" />
                                 </svg>
                             </span>
-                            <input type="text" name="q"
+                            <input type="text" name="name"
                                 class="text-sm w-full py-3 border-none pl-10 focus:outline-none focus:border-transparent focus:ring-0 focus:bg-white focus:text-gray-900"
                                 placeholder="Cari berdasarkan nama dokter" autocomplete="off">
                         </div>

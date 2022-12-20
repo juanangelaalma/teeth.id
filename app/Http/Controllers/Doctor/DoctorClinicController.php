@@ -13,7 +13,7 @@ class DoctorClinicController extends Controller
     public function index() {
         $user = Auth::user();
         $clinic = Clinic::with(['schedules', 'schedule_hours'])->where('user_id', $user->id)->first();
-        $hasClinic = $clinic->exists();
+        $hasClinic = $clinic;
         return view('doctor.clinic.index', [
             'hasClinic' => $hasClinic,
             'clinic' => $clinic,

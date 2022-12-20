@@ -71,28 +71,43 @@ class DoctorSettingController extends Controller
 
     public function clinic() {
         $clinic = auth()->user()->clinic;
-        return view('doctor.settings.clinic', compact('clinic'));
+        $cities = \Indonesia::allCities();
+        return view('doctor.settings.clinic', compact('clinic', 'cities'));
     }
 
     public function update_clinic(Request $request, $clinic_id) {
         $request->validate([
             'name' => 'required',
             'address' => 'required',
-            'is_open' => 'required'
+            'is_open' => 'required',
+            'city' => 'required',
+            'price' => 'required|numeric',
         ]);
 
         if($clinic_id == 'null') {
+            $data = [
+                'name' => $request->name,
+                'address' => $request->address,
+                'is_open' => $request->is_open == 'true' ? true : false,
+                'user_id' => auth()->user()->id,
+                'city_code' => $request->city,
+                'price' => intval($request->price),
+            ];
             Clinic::create([
                 'name' => $request->name,
                 'address' => $request->address,
                 'is_open' => $request->is_open == 'true' ? true : false,
                 'user_id' => auth()->user()->id,
+                'city_code' => $request->city,
+                'price' => intval($request->price),
             ]);
         } else {
             $clinic = Clinic::find($clinic_id);
             $clinic->name = $request->name;
             $clinic->address = $request->address;
             $clinic->is_open = $request->is_open == 'true' ? true : false;
+            $clinic->city_code = $request->city;
+            $clinic->price = intval($request->price);
             $clinic->save();
         }
 

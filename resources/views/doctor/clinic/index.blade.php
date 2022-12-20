@@ -17,10 +17,10 @@
                     {{-- 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday' --}}
                     <select name="day" id=""
                         class="block w-full mt-1 text-sm rounded-md @error('day') border-red-600 focus:border-red-400 @enderror focus:outline-none focus:shadow-outline-purple form-input">
-                        <option value="monday">Senin</option>
+                        <option selected value="monday">Senin</option>
                         <option value="tuesday">Selasa</option>
                         <option value="wednesday">Rabu</option>
-                        <option value="thrusday">Kamis</option>
+                        <option value="thursday">Kamis</option>
                         <option value="friday">Jumat</option>
                         <option value="saturday">Sabtu</option>
                         <option value="sunday">Minggu</option>
@@ -34,7 +34,8 @@
                     </span>
                     <select name="hour" id=""
                         class="block w-full mt-1 text-sm rounded-md @error('day') border-red-600 focus:border-red-400 @enderror focus:outline-none focus:shadow-outline-purple form-input">
-                        @for ($i = 0; $i < 25; $i++)
+                        <option value="00:00">00:00</option>
+                        @for ($i = 1; $i < 25; $i++)
                             @if ($i < 10)
                                 <option value="0{{ $i }}:00">0{{ $i }}:00</option>
                             @else
