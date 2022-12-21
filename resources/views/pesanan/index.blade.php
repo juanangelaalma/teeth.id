@@ -49,7 +49,10 @@
                                     yang ditentukan</p>
                             </div>
                         </div>
-                        <div class="flex flex-col justify-start items-start lg:items-end space-y-3">
+                        <div class="flex flex-col justify-start items-start lg:items-end space-y-3 relative">
+                            @if ($order->status === 'pending')
+                            <p class="text-green-500 absolute text-sm -top-2">Sudah selesai</p>
+                            @endif
                             <h4 class="text-content-heading text-secondary">{{ to_rupiah($order->cost) }}</h4>
                             <x-main-button-link href="{{ route('user.pesanan.cetak_invoice', $order) }}" class="px-12 mx-auto shadow-none w-full text-center">
                                 Lihat invoice</x-main-button-link>
