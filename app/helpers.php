@@ -25,3 +25,8 @@ function day_english_to_indo($day) {
   ];
   return $days[$day];
 }
+
+function to_rupiah($number) {
+  $rupiah = "Rp " . number_format($number,0,',','.');
+  return $rupiah;
+}

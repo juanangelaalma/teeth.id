@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Doctor extends Model
 {
     use HasFactory;
+    use \Znck\Eloquent\Traits\BelongsToThrough;
 
     public function user() {
         return $this->belongsTo(User::class);
@@ -32,4 +33,8 @@ class Doctor extends Model
     public function forums() {
         return $this->hasMany(Forum::class);
     }
+
+    // public function clinic() {
+    //     return $this->hasOneThrough(Clinic::class, User::class);
+    // }
 }
