@@ -44,9 +44,11 @@
                     Kota klinik
                 </span>
                 <select name="city" class="block w-full mt-1 text-sm rounded-md @error('city') border-red-600 focus:border-red-400 @enderror focus:outline-none focus:shadow-outline-purple form-input" id="">
-                    <option value="">Kota</option>
+                    @if (!$clinic)
+                        <option value="" selected disabled>Pilih kota</option>
+                    @endif
                     @foreach ($cities as $city)
-                    <option value="{{ $city->code }}" {{ $clinic ? ($city->code === $clinic->city_code ? 'selected' : '') : '' }}>{{ $city->name }}</option>
+                    <option value="{{ $city->id }}" {{ $clinic ? ($city->id === $clinic->city_id ? 'selected="true"' : '') : '' }}>{{ $city->name }}</option>
                     @endforeach
                 </select>
                 <x-input-error :messages="$errors->get('price')" class="mt-2" />

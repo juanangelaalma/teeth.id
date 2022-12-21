@@ -90,7 +90,7 @@ class DoctorSettingController extends Controller
                 'address' => $request->address,
                 'is_open' => $request->is_open == 'true' ? true : false,
                 'user_id' => auth()->user()->id,
-                'city_code' => $request->city,
+                'city_id' => $request->city,
                 'price' => intval($request->price),
             ];
             Clinic::create([
@@ -98,7 +98,7 @@ class DoctorSettingController extends Controller
                 'address' => $request->address,
                 'is_open' => $request->is_open == 'true' ? true : false,
                 'user_id' => auth()->user()->id,
-                'city_code' => $request->city,
+                'city_id' => $request->city,
                 'price' => intval($request->price),
             ]);
         } else {
@@ -106,7 +106,7 @@ class DoctorSettingController extends Controller
             $clinic->name = $request->name;
             $clinic->address = $request->address;
             $clinic->is_open = $request->is_open == 'true' ? true : false;
-            $clinic->city_code = $request->city;
+            $clinic->city_id = $request->city;
             $clinic->price = intval($request->price);
             $clinic->save();
         }

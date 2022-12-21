@@ -42,7 +42,7 @@
                             <select name="location" class="input-select-search text-sm w-full py-3 border-none appearance-none outline-none focus:border-transparent focus:ring-0 text-dark pl-10 focus:outline-none focus:bg-white focus:text-gray-900" id="">
                                 <option value="">Semua lokasi</option>
                                 @foreach ($cities as $city)
-                                <option value="{{ $city->code }}">{{ $city->name }}</option>
+                                <option value="{{ $city->id }}">{{ $city->name }}</option>
                                 @endforeach
                             </select>
                         </div>

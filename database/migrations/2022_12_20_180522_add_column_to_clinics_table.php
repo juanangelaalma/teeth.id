@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::table('clinics', function (Blueprint $table) {
             $table->unsignedBigInteger('price')->after('address');
-            $table->char('city_code', 4)->after('price');
+            $table->unsignedBigInteger('city_id')->after('price');
 
-            $table->foreign('city_code')
-                ->references('code')
+            $table->foreign('city_id')
+                ->references('id')
                 ->on('indonesia_cities')
                 ->onUpdate('cascade')->onDelete('restrict');
         });

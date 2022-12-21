@@ -16,12 +16,12 @@ class CreateDistrictsTable extends Migration
         Schema::create(config('laravolt.indonesia.table_prefix').'districts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('code', 7)->unique();
-            $table->char('city_code', 4);
+            $table->char('city_id', 4);
             $table->string('name', 255);
             $table->text('meta')->nullable();
             $table->timestamps();
 
-            $table->foreign('city_code')
+            $table->foreign('city_id')
                 ->references('code')
                 ->on(config('laravolt.indonesia.table_prefix').'cities')
                 ->onUpdate('cascade')->onDelete('restrict');
