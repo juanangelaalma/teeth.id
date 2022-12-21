@@ -26,6 +26,6 @@ Route::prefix('/cities')->group(function() {
     Route::get('/search', [CitiesController::class, 'searchCities']);
 });
 
-Route::get('/schedule_hours/{day}', [ScheduleController::class, 'getByDay']);
+Route::get('/schedule_hours/{day}/{clinic_id}', [ScheduleController::class, 'getByDay']);
 
 Route::post('feedback', [FeedbackController::class, 'create']);

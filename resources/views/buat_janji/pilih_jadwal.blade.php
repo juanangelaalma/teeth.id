@@ -75,8 +75,8 @@
                             </li>
                             <li class="filter-switch-item flex relative h-14">
                                 <input type="radio" checked name="date" value="today" id="date-0" class="sr-only">
-                                <label for="date-0" onclick="getByDay('today')"
-                                    class="border border-primary-light h-14 py-1 px-4 text-sm text-center leading-6 text-light-gray font-normal bg-primary-light rounded">
+                                <label for="date-0" onclick="getByDay('today', {{ $user->clinic->id }})"
+                                    class="border border-primary-light h-14 py-1 px-4 text-sm text-center leading-6 text-light-gray font-normal bg-primary-light rounded flex justify-center items-center">
                                     <span class="text-[10px] md:text-sm block">Hari ini</span>
                                     @php
                                         $isTodayExist = false;
@@ -86,62 +86,24 @@
                                             @php
                                                 $isTodayExist = true;
                                             @endphp
-                                            <span
-                                                class="text-[10px] md:text-xs block -mt-1 lg:mt-1">{{ $item->hours->count() }}
-                                                Jadwal</span>
                                         @endif
                                     @endforeach
-                                    @if (!$isTodayExist)
-                                        <span class="text-[10px] md:text-xs block -mt-1 lg:mt-1">0 jadwal</span>
-                                    @endif
                                 </label>
                                 <div aria-hidden="true" class="filter-active"></div>
                             </li>
                             <li class="filter-switch-item flex relative h-14">
                                 <input type="radio" value="tomorrow" name="date" id="date-1" class="sr-only">
-                                <label for="date-1" onclick="getByDay('tomorrow')"
-                                    class="border border-primary-light h-14 py-1 px-4 text-sm text-center leading-6 text-light-gray font-normal bg-primary-light rounded">
+                                <label for="date-1" onclick="getByDay('tomorrow', {{ $user->clinic->id }})"
+                                    class="border border-primary-light h-14 py-1 px-4 text-sm text-center leading-6 text-light-gray font-normal bg-primary-light rounded flex justify-center items-center">
                                     <span class="text-[10px] md:text-sm block">Besok</span>
-                                    @php
-                                        $isTommorrowExist = false;
-                                    @endphp
-                                    @foreach ($user->schedules as $item)
-                                        @if ($item->day === $tomorrow)
-                                            @php
-                                                $isTommorrowExist = true;
-                                            @endphp
-                                            <span
-                                                class="text-[10px] md:text-xs block -mt-1 lg:mt-1">{{ $item->hours->count() }}
-                                                Jadwal</span>
-                                        @endif
-                                    @endforeach
-                                    @if (!$isTommorrowExist)
-                                        <span class="text-[10px] md:text-xs block -mt-1 lg:mt-1">0 Jadwal</span>
-                                    @endif
                                 </label>
                                 <div aria-hidden="true" class="filter-active"></div>
                             </li>
                             <li class="filter-switch-item flex relative h-14">
                                 <input type="radio" value="after_tomorrow" name="date" id="date-2" class="sr-only">
-                                <label for="date-2" onclick="getByDay('after_tomorrow')"
-                                    class="border border-primary-light h-auto py-1 px-4 text-sm text-center leading-6 text-light-gray font-normal bg-primary-light rounded">
+                                <label for="date-2" onclick="getByDay('after_tomorrow', {{ $user->clinic->id }})"
+                                    class="border border-primary-light h-auto py-1 px-4 text-sm text-center leading-6 text-light-gray font-normal bg-primary-light rounded flex justify-center items-center">
                                     <span class="text-[10px] md:text-sm block">Lusa</span>
-                                    @php
-                                        $isAfterTomorrowExist = false;
-                                    @endphp
-                                    @foreach ($user->schedules as $item)
-                                        @if ($item->day === $afterTomorrow)
-                                            @php
-                                                $isAfterTomorrowExist = true;
-                                            @endphp
-                                            <span
-                                                class="text-[10px] md:text-xs block -mt-1 lg:mt-1">{{ $$item->hours->count() }}
-                                                Jadwal</span>
-                                        @endif
-                                    @endforeach
-                                    @if (!$isAfterTomorrowExist)
-                                        <span class="text-[10px] md:text-xs block -mt-1 lg:mt-1">0 Jadwal</span>
-                                    @endif
                                 </label>
                                 <div aria-hidden="true" class="filter-active"></div>
                             </li>
@@ -269,9 +231,10 @@
             night.innerHTML = loader
         }
 
-        async function getByDay(day) {
+        async function getByDay(day, clinic_id) {
             loading()
-            const response = await axios.get(`/api/schedule_hours/${day}`)
+            const response = await axios.get(`/api/schedule_hours/${day}/${clinic_id}`)
+            console.log(response.data)
             const data = response?.data
             const hours = data[0]?.hours
             refresh()
