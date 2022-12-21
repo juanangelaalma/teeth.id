@@ -89,4 +89,8 @@ class User extends Authenticatable
     public function clinic() {
         return $this->hasOne(Clinic::class);
     }
+
+    public function schedules() {
+        return $this->hasManyThrough(ClinicSchedule::class, Clinic::class);
+    }
 }

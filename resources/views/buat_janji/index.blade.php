@@ -115,7 +115,8 @@
                                 <p class="text-content-paragraph font-medium text-dark">Biaya Konsultasi</p>
                                 <p class="text-content-paragraph font-semibold text-primary">{{ to_rupiah($doctor->clinic->price) }}</p>
                             </div>
-                            <x-main-button-link href="{{ route('buat_janji.pilih_jadwal', $doctor->doctor->id) }}" class="text-center mt-2 bg-secondary shadow-none">Buat janji
+                            {{-- ini nih sebenarnya user->id --}}
+                            <x-main-button-link href="{{ route('buat_janji.pilih_jadwal', $doctor->id) }}" class="text-center mt-2 bg-secondary shadow-none">Buat janji
                             </x-main-button-link>
                         </div>
                     </div>

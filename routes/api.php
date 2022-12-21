@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CitiesController;
+use App\Http\Controllers\Api\ScheduleController;
 use App\Http\Controllers\User\FeedbackController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,5 +25,7 @@ Route::prefix('/cities')->group(function() {
     Route::get('/', [CitiesController::class, 'cities']);
     Route::get('/search', [CitiesController::class, 'searchCities']);
 });
+
+Route::get('/schedule_hours/{day}', [ScheduleController::class, 'getByDay']);
 
 Route::post('feedback', [FeedbackController::class, 'create']);

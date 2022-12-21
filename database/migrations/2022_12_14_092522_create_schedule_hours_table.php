@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('hour');
             $table->timestamps();
 
-            $table->foreign('clinic_schedule_id')->references('id')->on('clinic_schedules');
+            $table->foreign('clinic_schedule_id')->references('id')->on('clinic_schedules')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
