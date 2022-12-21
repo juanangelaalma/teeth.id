@@ -25,10 +25,11 @@ Route::prefix('pesanan')->group(function() {
 
 Route::prefix('/buat-janji')->group(function() {
     Route::get('/', [BuatJanjiController::class, 'index'])->name('buat_janji.index');
-    Route::get('/{user_id}/pilih-jadwal', [BuatJanjiController::class, 'pilih_jadwal'])->name('buat_janji.pilih_jadwal');
-    Route::post('/{user_id}/post-pilih-jadwal', [BuatJanjiController::class, 'post_pilih_jadwal'])->name('buat_janji.post_pilih_jadwal');
-    Route::get('/ringkasan-pesanan', [BuatJanjiController::class, 'ringkasan_pesanan'])->name('buat_janji.ringkasan_pesanan');
-    Route::get('/search', [BuatJanjiController::class, 'search'])->name('buat_janji.search');
+    Route::get('/{user_id}/pilih-jadwal', [BuatJanjiController::class, 'pilih_jadwal'])->middleware('auth')->name('buat_janji.pilih_jadwal');
+    Route::post('/{user_id}/post-pilih-jadwal', [BuatJanjiController::class, 'post_pilih_jadwal'])->middleware('auth')->name('buat_janji.post_pilih_jadwal');
+    Route::get('/ringkasan-pesanan', [BuatJanjiController::class, 'ringkasan_pesanan'])->middleware('auth')->name('buat_janji.ringkasan_pesanan');
+    Route::post('/bayar-pesanan', [BuatJanjiController::class, 'bayar_pesanan'])->middleware('auth')->name('buat_janji.bayar_pesanan');
+    Route::get('/search', [BuatJanjiController::class, 'search'])->middleware('auth')->name('buat_janji.search');
 });
 
 Route::prefix('/forum')->group(function () {

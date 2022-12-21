@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clinic;
 use App\Models\Doctor;
+use App\Models\Order;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -109,5 +111,21 @@ class BuatJanjiController extends Controller
             'hour' => 'required',
         ]);
         return redirect()->route('buat_janji.ringkasan_pesanan', ['user_id' => $user_id, 'date' => $request->date, 'hour' => $request->hour]);
+    }
+
+    public function bayar_pesanan(Request $request) {
+        $user = Auth::user();
+        $clinic = Clinic::where('user_id', $request->user_id)->first();
+
+        Order::create([
+            'customer_id' => $user->id,
+            'provider_id' => $request->user_id,
+            'date' => $request->date,
+            'hour' => $request->hour,
+            'cost' => $clinic->price,
+            'status' => 'pending',
+        ]);
+
+        return redirect()->route('user.pesanan.index');
     }
 }
