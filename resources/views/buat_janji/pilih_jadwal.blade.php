@@ -43,7 +43,7 @@
             <div class="w-full lg:w-2/5">
                 <div class="w-full p-4 border border-gray-100 rounded-lg">
                     <h6 class="font-bold text-content-date text-dark">Tentang dokter</h6>
-                    <p class="text-light-gray">dr. PIC Rapid Test</p>
+                    <p class="text-light-gray">dr. {{ $user->name }}</p>
                     <hr class="text-gray-100 w-full my-6">
                     <div class="flex flex-row items-center justify-start">
                         <div class="overflow-hidden h-[60px] w-[60px] rounded-md">

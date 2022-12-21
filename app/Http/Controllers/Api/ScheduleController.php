@@ -44,7 +44,7 @@ class ScheduleController extends Controller
             return response()->json($this->schedules);
         } else if ($day === 'after_tomorrow') {
             $afterTomorrow = strtolower(Carbon::tomorrow()->addDay(1)->format('l'));
-            $this->schedules = ClinicSchedule::with('hours')->where(['day' => $afterTomorrow, 'clinic_id'])->get();
+            $this->schedules = ClinicSchedule::with('hours')->where(['day' => $afterTomorrow, 'clinic_id' => $clinic_id])->get();
             $date = Carbon::tomorrow()->addDay()->format('Y-m-d');
             $this->filterSchedule($clinic_id, $date);
             return response()->json($this->schedules);

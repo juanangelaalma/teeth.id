@@ -78,6 +78,7 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
 
     Route::prefix('order')->group(function() {
         Route::get('/', [DoctorOrderController::class, 'index'])->name('doctor.order.index');
+        Route::post('/{order:id}/asdone', [DoctorOrderController::class, 'done'])->name('doctor.order.asdone');
     });
     
     Route::prefix('clinic')->group(function() {
