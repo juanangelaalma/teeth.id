@@ -28,7 +28,7 @@
                             </div>
                             <div class="flex justify-start">
                                 <div class="bg-primary-light px-3 py-1 rounded-xl">
-                                    <p class="text-sm text-light-gray"><span class="text-primary font-semibold">10
+                                    <p class="text-sm text-light-gray"><span class="text-primary font-semibold">{{  $user->orders ? $user->orders()->count() : 0 }}
                                             pasien</span>
                                         telah
                                         membuat janji</p>

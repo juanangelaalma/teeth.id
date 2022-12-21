@@ -10,7 +10,7 @@ class PesananController extends Controller
 {
     public function index() {
         $user = Auth::user();
-        $orders = Order::with('provider')->where('customer_id', $user->id)->get();
+        $orders = Order::with('provider')->where('customer_id', $user->id)->orderBy('created_at', 'desc')->get();
         // with function looping
         return view('pesanan.index', compact('orders'));
     }

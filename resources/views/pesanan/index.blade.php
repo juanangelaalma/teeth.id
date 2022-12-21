@@ -9,7 +9,7 @@
                 <div class="space-y-3">
                     <h4>Pesanan #{{ $order->invoice_id }}</h4>
                     <div class="flex flex-col space-y-5 lg:flex-row justify-between lg:space-x-8">
-                        <div class="flex flex-col lg:flex-row">
+                        <div class="flex flex-col lg:flex-row lg:min-w-[350px]">
                             <div class="w-full overflow-hidden md:h-[140px] md:w-[140px] rounded-md mb-3 mx-auto lg:mx-0">
                                 <img class="w-full h-full object-cover object-center"
                                     src="{{ $order->provider->doctor->photo ? $order->provider->doctor->photo : '/assets/images/default.jpg' }}"
@@ -45,13 +45,13 @@
                             </div>
                             <div    
                                 class="inline-flex mt-3 px-3 py-2 bg-[rgba(255,169,89,0.2)] rounded-lg items-center space-x-3 text-secondary">
-                                <p class="flex-1 text-light-gray font-normal text-sm">Pastikan datang 15 menit sebelum waktu
+                                <p class="flex text-light-gray font-normal text-sm">Pastikan datang 15 menit sebelum waktu
                                     yang ditentukan</p>
                             </div>
                         </div>
                         <div class="flex flex-col justify-start items-start lg:items-end space-y-3 relative">
-                            @if ($order->status === 'pending')
-                            <p class="text-green-500 absolute text-sm -top-2">Sudah selesai</p>
+                            @if ($order->status !== 'pending')
+                                <p class="text-green-500 absolute text-sm -top-2">Sudah selesai</p>
                             @endif
                             <h4 class="text-content-heading text-secondary">{{ to_rupiah($order->cost) }}</h4>
                             <x-main-button-link href="{{ route('user.pesanan.cetak_invoice', $order) }}" class="px-12 mx-auto shadow-none w-full text-center">

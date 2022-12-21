@@ -95,7 +95,7 @@ class User extends Authenticatable
     }
 
     public function orders() {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, 'provider_id', 'id');
     }
 
     public function appointment() {
