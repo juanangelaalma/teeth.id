@@ -1,4 +1,4 @@
-@extends('layouts.user', ['title' => 'Artikel'])
+@extends('layouts.user', ['title' => 'Invoice'])
 
 @section('content')
     <div>
@@ -7,33 +7,33 @@
             <div class="flex flex-col lg:w-[793px] mx-auto">
                 <div class="flex w-full flex-row justify-between">
                     <div class="flex flex-col items-start">
-                        <h4 class="font-semibold text-primary">Teeth.id</h4>
-                        <h6 class="font-semibold text-dark text-paragraph text-[15px] lg:text-paragraph">Ketintang</h6>
+                        <x-brand/>
+                        <h6 class="font-semibold mt-2 text-dark text-paragraph text-[15px] lg:text-paragraph">Ketintang</h6>
                         <p class="text-[15px] lg:text-paragraph">Jl Raya Ketintang No. 78 </p>
                         <p class="text-[15px] lg:text-paragraph">Surabaya, Jawa Timur 66261</p>
                     </div>
                     <div class="flex flex-col items-end">
                         <h1 class="text-dark text-section-header font-bold lg:text-[50px]">INVOICE</h1>
-                        <p>Pesanan #128403840</p>
+                        <p>Pesanan {{ $order->invoice_id }}</p>
                     </div>
                 </div>
                 <hr class="w-full border-dark my-4">
                 <div class="flex flex-wrap">
                   <div class="w-1/2 lg:w-1/3 my-3">
                     <h6 class="font-semibold">Nama Pasien:</h6>
-                    <p class="text-normal">Juan Angela Alma</p>
+                    <p class="text-normal">{{ $order->customer->name }}</p>
                   </div>
                   <div class="w-1/2 lg:w-1/3 my-3">
                     <h6 class="font-semibold">Nama Dokter:</h6>
-                    <p class="text-normal">Juan Angela Alma</p>
+                    <p class="text-normal">{{ $order->provider->name }}</p>
                   </div>
                   <div class="w-1/2 lg:w-1/3 my-3">
                     <h6 class="font-semibold">Janjian Pada:</h6>
-                    <p class="text-normal">18 Agustus 2022 15:08 WIB</p>
+                    <p class="text-normal">{{ timestamp_to_date($order->date) }} {{ $order->hour }} WIB</p>
                   </div>
                   <div class="w-1/2 lg:w-1/3 my-3">
                     <h6 class="font-semibold">Pesanan dibuat pada:</h6>
-                    <p class="text-normal">17 Agustus 2022</p>
+                    <p class="text-normal">{{ timestamp_to_date($order->created_at) }}</p>
                   </div>
                   <div class="w-1/2 lg:w-1/3 my-3">
                     <h6 class="font-semibold">Tipe Pembayaran:</h6>
@@ -41,7 +41,7 @@
                   </div>
                   <div class="w-1/2 lg:w-1/3 my-3">
                     <h6 class="font-semibold">Alamat klinik:</h6>
-                    <p class="text-normal">Jl bromo no 37 kauman kalangbret</p>
+                    <p class="text-normal">{{ $order->provider->clinic->address }}</p>
                   </div>
                 </div>
                 <hr class="w-full border-dark my-4">
@@ -50,7 +50,7 @@
                     Biaya layanan:
                   </span>
                   <span class="w-1/2 lg:w-1/3 font-normal">
-                    Rp80.000,00
+                    {{ to_rupiah($order->cost) }}
                   </span>
                 </div>
                 <div class="flex flex-row justify-between my-1">
@@ -58,13 +58,13 @@
                     Total:
                   </span>
                   <span class="w-1/2 lg:w-1/3 font-normal">
-                    Rp80.000,00
+                    {{ to_rupiah($order->cost) }}
                   </span>
                 </div>
                 <div class="flex flex-row justify-between my-6">
                   <span class="w-1/2 lg:w-1/3 font-bold"></span>
                   <span class="w-1/2 lg:w-1/3 text-[30px] lg:text-section-header font-bold">
-                    Rp80.000,00
+                    {{ to_rupiah($order->cost) }}
                   </span>
                 </div>
             </div>

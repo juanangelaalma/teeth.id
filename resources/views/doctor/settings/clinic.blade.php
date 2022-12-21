@@ -4,6 +4,12 @@
             <span>Klinik saya</span>
         </label>
         <!-- Invalid input -->
+        @if (!Auth::user()->isVerified())
+        <div class="bg-secondary-opacity w-full rounde-xl rounded-lg p-4 mb-4">
+            <p class="text-dark-gray">Akun Anda belum diverifikasi. Lakukan upload dokumen agar kami dapat
+                verifikasi akun anda pada <a href="{{ route('doctor.documents.index') }}" class="text-primary">Verifikasi Sekarang</a></p>
+        </div>
+        @else
         <form class="flex flex-wrap items-end md:grid-cols-2 py-3 mb-8 space-y-4"
             action="{{ route('doctor.setting.clinic_update', $clinic ? $clinic : 'null') }}" method="POST"
             enctype="multipart/form-data">
@@ -28,6 +34,30 @@
                     placeholder="Masukkan alamat klinik" type="text" name="address"
                     value="{{ $clinic ? $clinic->address : '' }}" />
                 <x-input-error :messages="$errors->get('address')" class="mt-2" />
+            </label>
+            <label class="block text-sm w-full md:w-2/3 md:pr-2">
+                <span class="text-dark mb-1 font-bold">
+                    Biaya per kunjungan
+                </span>
+                <input
+                    class="block w-full mt-1 text-sm rounded-md @error('price') border-red-600 focus:border-red-400 @enderror focus:outline-none focus:shadow-outline-purple form-input"
+                    placeholder="Masukkan alamat klinik" type="number" name="price"
+                    value="{{ $clinic ? $clinic->price : '' }}" />
+                <x-input-error :messages="$errors->get('price')" class="mt-2" />
+            </label>
+            <label class="block text-sm w-full md:w-2/3 md:pr-2">
+                <span class="text-dark mb-1 font-bold">
+                    Kota klinik
+                </span>
+                <select name="city" class="block w-full mt-1 text-sm rounded-md @error('city') border-red-600 focus:border-red-400 @enderror focus:outline-none focus:shadow-outline-purple form-input" id="">
+                    @if (!$clinic)
+                        <option value="" selected disabled>Pilih kota</option>
+                    @endif
+                    @foreach ($cities as $city)
+                    <option value="{{ $city->id }}" {{ $clinic ? ($city->id === $clinic->city_id ? 'selected="true"' : '') : '' }}>{{ $city->name }}</option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('price')" class="mt-2" />
             </label>
             <label class="block text-sm w-full md:w-2/3 md:pr-2">
                 <span class="text-dark mb-1 font-bold">
@@ -59,6 +89,7 @@
                 <x-main-button>Simpan Perubahan</x-main-button>
             </div>
         </form>
+        @endif
     </div>
     <script>
       const openSwitcher = document.getElementById('is_open');

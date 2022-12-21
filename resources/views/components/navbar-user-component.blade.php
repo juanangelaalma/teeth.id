@@ -3,9 +3,7 @@ $userAuth = auth()->user();
 @endphp
 <x-section-component {{ $attributes->merge(['class' => 'bg-transparent py-0']) }}>
     <nav id="navbar" class="flex flex-row w-full justify-between h-[86px] items-center">
-        <div class="flex">
-            <h1 class="text-primary">Teeth.id</h1>
-        </div>
+        <x-brand/>
         <ul
             class="fixed h-screen top-0 right-0 flex flex-col space-y-10 pt-28 items-center w-[85%] translate-x-full glassmorphism-box z-20 lg:bg-transparent lg:border-none lg:translate-x-0 lg:pt-0 lg:w-auto lg:space-y-0 lg:h-auto lg:static lg:flex lg:flex-row lg:space-x-10 lg:pr-3">
             <li class="text-md text-dark font-normal hover:text-primary transition-colors duration-200">

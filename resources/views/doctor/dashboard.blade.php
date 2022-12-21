@@ -32,10 +32,10 @@
                 <div class="w-full mt-4 space-y-1">
                     <p class="text-content-paragraph">Progress profile</p>
                     <div class="w-full bg-[#DADBDD] rounded-full h-2 mb-4">
-                        <div class="bg-secondary h-2 rounded-full" style="width: 45%"></div>
+                        <div class="bg-secondary h-2 rounded-full" style="width: {{ $progress }}%"></div>
                     </div>
                     <div class="w-full flex justify-end">
-                        <span class="text-light-gray text-[13px]">45% terpenuhi</span>
+                        <span class="text-light-gray text-[13px]">{{ $progress }}% terpenuhi</span>
                     </div>
                 </div>
                 <div class="text-[15px] text-light-gray mt-4 space-y-2">
@@ -59,7 +59,7 @@
                         <h1 class="text-primary text-section-paragraph">Selamat datang dokter 🎉</h1>
                         <p class="text-content-paragraph text-dark-gray mb-6"><span class="text-dark font-semibold">Tetap semangat!!.</span> Masa depan adalah milik Anda yang telah menyiapkannya dari
                             hari ini</p>
-                        <x-main-button-link>Lihat Janji</x-main-button-link>
+                        <x-main-button-link href="{{ route('doctor.order.index') }}">Lihat Janji</x-main-button-link>
                     </div>
                         <img class="w-full lg:w-[200px]" src="{{ asset('assets/images/doctor-about.png') }}" alt="">
                     </div>

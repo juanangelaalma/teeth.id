@@ -10,9 +10,9 @@
                 <img class="h-full object-cover object-center" src="/assets/images/consultaion.png" alt="">
             </div>
         </x-feature-card-component>
-        <x-feature-card-component title="Behel Notification" description="Dapatkan beberapa pemberitahuan terkait behel">
+        <x-feature-card-component title="Janjian Mudah" description="Dapatkan pengalaman janjian mudah di Teeth.id">
             <div class="h-[94px]">
-                <img class="h-full object-cover object-center" src="/assets/images/behel-notification.png" alt="">
+                <img class="h-full object-cover object-center" src="/assets/images/easy-order.png" alt="">
             </div>
         </x-feature-card-component>
         <x-feature-card-component title="Artikel" description="Membaca artikel tentang kesehatan gigi">

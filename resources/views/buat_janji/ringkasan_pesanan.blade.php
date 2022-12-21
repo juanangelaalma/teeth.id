@@ -1,4 +1,4 @@
-@extends('layouts.user', ['title' => 'Artikel'])
+@extends('layouts.user', ['title' => 'Ringkasan Pemesanan'])
 
 @section('content')
     <div>
@@ -14,12 +14,12 @@
                         <div class="rounded-lg flex flex-col lg:flex-row">
                             <div class="w-full overflow-hidden md:h-[140px] md:w-[140px] rounded-md mb-3 mx-auto lg:mx-0">
                                 <img class="w-full h-full object-cover object-center"
-                                    src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg"
+                                    src="{{ $user->doctor->photo ? $user->doctor->photo : '/assets/images/default.jpg' }}"
                                     alt="">
                             </div>
                             <div class="md:px-4 mb-3 space-y-2 md:space-y-3 md:py-3">
                                 <h6 class="text-left text-dark text-content-date leading-[16px] mx-auto">dr.
-                                    Juan Angela Alma</h6>
+                                    {{ $user->name }}</h6>
                                 <p class="text-light-gray">Dokter Gigi</p>
                                 <div class="flex flex-row items-end justify-start space-x-2 text-dark-gray mx-auto">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -28,13 +28,11 @@
                                             d="M8 15H9V16C9 16.2652 9.10536 16.5196 9.29289 16.7071C9.48043 16.8946 9.73478 17 10 17C10.2652 17 10.5196 16.8946 10.7071 16.7071C10.8946 16.5196 11 16.2652 11 16V15H12C12.2652 15 12.5196 14.8946 12.7071 14.7071C12.8946 14.5196 13 14.2652 13 14C13 13.7348 12.8946 13.4804 12.7071 13.2929C12.5196 13.1054 12.2652 13 12 13H11V12C11 11.7348 10.8946 11.4804 10.7071 11.2929C10.5196 11.1054 10.2652 11 10 11C9.73478 11 9.48043 11.1054 9.29289 11.2929C9.10536 11.4804 9 11.7348 9 12V13H8C7.73478 13 7.48043 13.1054 7.29289 13.2929C7.10536 13.4804 7 13.7348 7 14C7 14.2652 7.10536 14.5196 7.29289 14.7071C7.48043 14.8946 7.73478 15 8 15V15ZM17 4H15V3C15 2.20435 14.6839 1.44129 14.1213 0.87868C13.5587 0.316071 12.7956 0 12 0H8C7.20435 0 6.44129 0.316071 5.87868 0.87868C5.31607 1.44129 5 2.20435 5 3V4H3C2.20435 4 1.44129 4.31607 0.87868 4.87868C0.316071 5.44129 0 6.20435 0 7V17C0 17.7956 0.316071 18.5587 0.87868 19.1213C1.44129 19.6839 2.20435 20 3 20H17C17.7956 20 18.5587 19.6839 19.1213 19.1213C19.6839 18.5587 20 17.7956 20 17V7C20 6.20435 19.6839 5.44129 19.1213 4.87868C18.5587 4.31607 17.7956 4 17 4ZM7 3C7 2.73478 7.10536 2.48043 7.29289 2.29289C7.48043 2.10536 7.73478 2 8 2H12C12.2652 2 12.5196 2.10536 12.7071 2.29289C12.8946 2.48043 13 2.73478 13 3V4H7V3ZM18 17C18 17.2652 17.8946 17.5196 17.7071 17.7071C17.5196 17.8946 17.2652 18 17 18H3C2.73478 18 2.48043 17.8946 2.29289 17.7071C2.10536 17.5196 2 17.2652 2 17V10H18V17ZM18 8H2V7C2 6.73478 2.10536 6.48043 2.29289 6.29289C2.48043 6.10536 2.73478 6 3 6H17C17.2652 6 17.5196 6.10536 17.7071 6.29289C17.8946 6.48043 18 6.73478 18 7V8Z"
                                             fill="#515559" />
                                     </svg>
-                                    <p class="text-content-paragraph leading-none font-normal text-dark-gray">RSUD Dokter
-                                        Juan
-                                        Alma</p>
+                                    <p class="text-content-paragraph leading-none font-normal text-dark-gray">{{ $user->clinic->name }}</p>
                                 </div>
                                 <div class="flex justify-start">
                                     <div class="bg-primary-light px-3 py-1 rounded-xl">
-                                        <p class="text-sm text-light-gray"><span class="text-primary font-semibold">10
+                                        <p class="text-sm text-light-gray"><span class="text-primary font-semibold">{{  $user->orders ? $user->orders()->count() : 0 }}
                                                 pasien</span>
                                             telah
                                             membuat janji</p>
@@ -62,8 +60,8 @@
                                         fill="black" />
                                 </svg>
                                 <div>
-                                    <span class="text-dark font-medium text-sm block">Sabtu, 3 Desember 2022</span>
-                                    <span class="text-dark font-medium text-sm block">11:00 WIB</span>
+                                    <span class="text-dark font-medium text-sm block">{{ day_english_to_indo($day) }}, {{ date_to_date_indo($selectedDate) }}</span>
+                                    <span class="text-dark font-medium text-sm block">{{ $hour }} WIB</span>
                                 </div>
                             </div>
                         </div>
@@ -87,11 +85,11 @@
                         <hr class="text-gray-100 w-full my-6">
                         <div class="flex justify-between mb-4">
                             <span>Biaya konsultasi</span>
-                            <span>Rp410.000</span>
+                            <span>{{ to_rupiah($user->clinic->price) }}</span>
                         </div>
                         <div class="flex justify-between items-center mb-20">
                             <span>Total pembayaran</span>
-                            <span class="text-secondary text-[25px] font-semibold">Rp410.000</span>
+                            <span class="text-secondary text-[25px] font-semibold">{{ to_rupiah($user->clinic->price) }}</span>
                         </div>
                         <div class="my-6 flex justify-center items-center">
                             <x-main-button-link @click="open = true" class="px-12 mx-auto shadow-none w-full text-center">
@@ -103,7 +101,9 @@
 
             {{-- Modal Metode Pembayaran --}}
             <template x-if="true">
-                <div x-show="open"
+                <form action="{{ route('buat_janji.bayar_pesanan') }}" method="POST">
+                    @csrf
+                    <div x-show="open"
                     class="font-sans antialiased fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center">
                     <div x-show="open" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
                         x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
@@ -111,6 +111,10 @@
                         class="fixed inset-0 transition-opacity">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
+
+                    <input type="hidden" value="{{ $user->id }}" name="user_id">
+                    <input type="hidden" value="{{ $selectedDate }}" name="date">
+                    <input type="hidden" value="{{ $hour }}" name="hour">
 
                     <div x-show="open" x-transition:enter="ease-out duration-300"
                         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -164,7 +168,7 @@
                                     </h3>
                                     <div class="flex flex-row justify-between font-light mt-2">
                                         <span>Total pesanan</span>
-                                        <span>Rp410.000</span>
+                                        <span>{{ to_rupiah($user->clinic->price) }}</span>
                                     </div>
                                     <div class="flex flex-row justify-between font-light mt-1">
                                         <span>Biaya layanan</span>
@@ -177,16 +181,17 @@
                         <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row justify-between space-y-3 md:space-y-0">
                             <div>
                                 <span>Total Pembayaran</span>
-                                <h4 class="text-content-heading text-secondary">Rp410.000</h4>
+                                <h4 class="text-content-heading text-secondary">{{ to_rupiah($user->clinic->price) }}</h4>
                             </div>
                             <div class="flex justify-end items-center">
-                                <x-main-button-link @click="open = true"
+                                <x-main-button type="submit" @click="open = true"
                                     class="px-12 mx-auto shadow-none w-full text-center">
-                                    Bayar</x-main-button-link>
+                                    Buat Pesanan</x-main-button>
                             </div>
                         </div>
                     </div>
                 </div>
+                </form>
             </template>
         </div>
 

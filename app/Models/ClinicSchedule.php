@@ -18,4 +18,9 @@ class ClinicSchedule extends Model
     {
         return $this->belongsTo(Clinic::class);
     }
+
+    public function hours()
+    {
+        return $this->hasMany(ScheduleHour::class);
+    }
 }

@@ -14,11 +14,17 @@ class Clinic extends Model
         'name',
         'address',
         'is_open',
+        'price',
+        'city_id'
     ];
 
     public function schedules()
     {
         return $this->hasMany(ClinicSchedule::class);
+    }
+
+    public function schedule_hours() {
+        return $this->hasManyThrough(ScheduleHour::class, ClinicSchedule::class);
     }
 
     public function user()

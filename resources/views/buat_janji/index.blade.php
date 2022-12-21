@@ -1,4 +1,4 @@
-@extends('layouts.user', ['title' => 'Artikel'])
+@extends('layouts.user', ['title' => 'Buat Janji'])
 
 @section('content')
     <div>
@@ -6,11 +6,11 @@
         <div class="relative z-10">
             <div class="w-full relative bg-primary-light py-12 section-padding md:h-[250px] mx-auto flex">
                 <div
-                    class="flex flex-col md:absolute w-full md:px-[7rem] top-[50%] md:translate-y-[-50%] md:left-[50%] md:translate-x-[-50%] max-w-[1600px] z-20">
+                    class="relative flex flex-col md:absolute w-full md:px-[7rem] top-[50%] md:translate-y-[-50%] md:left-[50%] md:translate-x-[-50%] max-w-[1600px] z-20">
                     <h1 class="text-section-paragraph font-bold text-dark">Buat janji</h1>
                     <p class="text-[16px] text-light-gray">Buat janji dengan dokter pilihan kamu jauh lebih mudah dan
                         terpercaya</p>
-                    <form class="flex w-full flex-col md:flex-row my-8 space-y-3 md:space-y-0 rounded-md lg:overflow-hidden">
+                    <form method="GET" action="{{ route('buat_janji.search') }}" class="flex w-full h-11 flex-col md:flex-row my-8 space-y-3 md:space-y-0 rounded-md lg:overflow-hidden">
                         {{-- Search Lokasi --}}
                         <div class="relative marker:text-gray-600 flex-1 focus-within:text-gray-400">
                             <span class="absolute top-[50%] translate-y-[-50%] flex items-center pl-3">
@@ -39,9 +39,12 @@
                                     </defs>
                                 </svg>
                             </span>
-                            <input type="text" name="q"
-                                class="text-sm w-full py-3 border-none outline-none focus:border-transparent focus:ring-0 text-dark pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
-                                placeholder="Semua lokasi" autocomplete="off">
+                            <select name="location" class="input-select-search text-sm w-full py-3 border-none appearance-none outline-none focus:border-transparent focus:ring-0 text-dark pl-10 focus:outline-none focus:bg-white focus:text-gray-900" id="">
+                                <option value="">Semua lokasi</option>
+                                @foreach ($cities as $city)
+                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         {{-- Search nama --}}
@@ -56,7 +59,7 @@
                                         stroke-linejoin="round" />
                                 </svg>
                             </span>
-                            <input type="text" name="q"
+                            <input type="text" name="name"
                                 class="text-sm w-full py-3 border-none pl-10 focus:outline-none focus:border-transparent focus:ring-0 focus:bg-white focus:text-gray-900"
                                 placeholder="Cari berdasarkan nama dokter" autocomplete="off">
                         </div>
@@ -70,22 +73,24 @@
         </div>
         <div class="section-padding bg-white pt-6 pb-8 flex flex-col lg:flex-row">
             <div class="w-full rounded-lg border border-gray-100 p-6 flex flex-col max-w-[1400px] mx-auto">
-                <h1 class="font-bold text-dark text-section-paragraph">Hasil Pencarian</h1>
-                <p class="text-light-gray font-light text-btn-more leading-5">menampilkan <span
-                        class="text-dark font-medium">4</span> untuk nama <span class="text-dark font-medium">"Juan Angela
-                        Alma"</span> di <span class="text-dark font-medium">Semua Lokasi</span></p>
+                <h1 class="font-bold text-dark text-section-paragraph">{{ $searchTitle }}</h1>
+                {{-- <p class="text-light-gray font-light text-btn-more leading-5">menampilkan <span
+                    class="text-dark font-medium">4</span> untuk nama <span class="text-dark font-medium">"Juan Angela
+                    Alma"</span> di <span class="text-dark font-medium">Semua Lokasi</span></p> --}}
+                <p class="text-light-gray font-light text-btn-more leading-5">{!! $searchDescription !!}</p>
                 <hr class="text-gray-100 w-full my-6">
 
+                @foreach ($doctors as $doctor)
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full overflow-hidden md:h-[140px] md:w-[140px] md:rounded-md mb-3 mx-auto">
                         <img class="w-full h-full object-cover object-center"
-                            src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg"
+                            src="{{ $doctor->doctor->photo ? $doctor->doctor->photo : '/assets/images/default.jpg' }}"
                             alt="">
                     </div>
                     <div class="space-y-2 md:flex-1 md:flex md:flex-row md:justify-between">
                         <div class="md:px-4 mb-3 space-y-2 md:space-y-3 md:py-3">
                             <h6 class="text-left text-dark text-content-date leading-[16px] mx-auto">dr.
-                                Juan Angela Alma</h6>
+                                {{ $doctor->name }}</h6>
                             <p class="text-light-gray">Dokter Gigi</p>
                             <div class="flex flex-row items-end justify-start space-x-2 text-dark-gray mx-auto">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -94,12 +99,11 @@
                                         d="M8 15H9V16C9 16.2652 9.10536 16.5196 9.29289 16.7071C9.48043 16.8946 9.73478 17 10 17C10.2652 17 10.5196 16.8946 10.7071 16.7071C10.8946 16.5196 11 16.2652 11 16V15H12C12.2652 15 12.5196 14.8946 12.7071 14.7071C12.8946 14.5196 13 14.2652 13 14C13 13.7348 12.8946 13.4804 12.7071 13.2929C12.5196 13.1054 12.2652 13 12 13H11V12C11 11.7348 10.8946 11.4804 10.7071 11.2929C10.5196 11.1054 10.2652 11 10 11C9.73478 11 9.48043 11.1054 9.29289 11.2929C9.10536 11.4804 9 11.7348 9 12V13H8C7.73478 13 7.48043 13.1054 7.29289 13.2929C7.10536 13.4804 7 13.7348 7 14C7 14.2652 7.10536 14.5196 7.29289 14.7071C7.48043 14.8946 7.73478 15 8 15V15ZM17 4H15V3C15 2.20435 14.6839 1.44129 14.1213 0.87868C13.5587 0.316071 12.7956 0 12 0H8C7.20435 0 6.44129 0.316071 5.87868 0.87868C5.31607 1.44129 5 2.20435 5 3V4H3C2.20435 4 1.44129 4.31607 0.87868 4.87868C0.316071 5.44129 0 6.20435 0 7V17C0 17.7956 0.316071 18.5587 0.87868 19.1213C1.44129 19.6839 2.20435 20 3 20H17C17.7956 20 18.5587 19.6839 19.1213 19.1213C19.6839 18.5587 20 17.7956 20 17V7C20 6.20435 19.6839 5.44129 19.1213 4.87868C18.5587 4.31607 17.7956 4 17 4ZM7 3C7 2.73478 7.10536 2.48043 7.29289 2.29289C7.48043 2.10536 7.73478 2 8 2H12C12.2652 2 12.5196 2.10536 12.7071 2.29289C12.8946 2.48043 13 2.73478 13 3V4H7V3ZM18 17C18 17.2652 17.8946 17.5196 17.7071 17.7071C17.5196 17.8946 17.2652 18 17 18H3C2.73478 18 2.48043 17.8946 2.29289 17.7071C2.10536 17.5196 2 17.2652 2 17V10H18V17ZM18 8H2V7C2 6.73478 2.10536 6.48043 2.29289 6.29289C2.48043 6.10536 2.73478 6 3 6H17C17.2652 6 17.5196 6.10536 17.7071 6.29289C17.8946 6.48043 18 6.73478 18 7V8Z"
                                         fill="#515559" />
                                 </svg>
-                                <p class="text-content-paragraph leading-none font-normal text-dark-gray">RSUD Dokter Juan
-                                    Alma</p>
+                                <p class="text-content-paragraph leading-none font-normal text-dark-gray">{{ $doctor->clinic->name }}</p>
                             </div>
                             <div class="flex justify-start">
                                 <div class="bg-primary-light px-3 py-1 rounded-xl">
-                                    <p class="text-sm text-light-gray"><span class="text-primary font-semibold">10
+                                    <p class="text-sm text-light-gray"><span class="text-primary font-semibold">{{  $doctor->orders ? $doctor->orders()->count() : 0 }}
                                             pasien</span>
                                         telah
                                         membuat janji</p>
@@ -109,55 +113,16 @@
                         <div class="flex flex-col pt-4">
                             <div class="flex flex-row justify-between md:flex-col">
                                 <p class="text-content-paragraph font-medium text-dark">Biaya Konsultasi</p>
-                                <p class="text-content-paragraph font-semibold text-primary">Rp150.000</p>
+                                <p class="text-content-paragraph font-semibold text-primary">{{ to_rupiah($doctor->clinic->price) }}</p>
                             </div>
-                            <x-main-button-link class="text-center mt-2 bg-secondary shadow-none">Buat janji
+                            {{-- ini nih sebenarnya user->id --}}
+                            <x-main-button-link href="{{ route('buat_janji.pilih_jadwal', $doctor->id) }}" class="text-center mt-2 bg-secondary shadow-none">Buat janji
                             </x-main-button-link>
                         </div>
                     </div>
                 </div>
                 <hr class="text-gray-100 w-full my-6">
-                <div class="flex flex-col md:flex-row">
-                    <div class="w-full overflow-hidden md:h-[140px] md:w-[140px] rounded-md mb-3 mx-auto">
-                        <img class="w-full h-full object-cover object-center"
-                            src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg"
-                            alt="">
-                    </div>
-                    <div class="space-y-2 md:flex-1 md:flex md:flex-row md:justify-between">
-                        <div class="md:px-4 mb-3 space-y-2 md:space-y-3 md:py-3">
-                            <h6 class="text-left text-dark text-content-date leading-[16px] mx-auto">dr.
-                                Juan Angela Alma</h6>
-                            <p class="text-light-gray">Dokter Gigi</p>
-                            <div class="flex flex-row items-end justify-start space-x-2 text-dark-gray mx-auto">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M8 15H9V16C9 16.2652 9.10536 16.5196 9.29289 16.7071C9.48043 16.8946 9.73478 17 10 17C10.2652 17 10.5196 16.8946 10.7071 16.7071C10.8946 16.5196 11 16.2652 11 16V15H12C12.2652 15 12.5196 14.8946 12.7071 14.7071C12.8946 14.5196 13 14.2652 13 14C13 13.7348 12.8946 13.4804 12.7071 13.2929C12.5196 13.1054 12.2652 13 12 13H11V12C11 11.7348 10.8946 11.4804 10.7071 11.2929C10.5196 11.1054 10.2652 11 10 11C9.73478 11 9.48043 11.1054 9.29289 11.2929C9.10536 11.4804 9 11.7348 9 12V13H8C7.73478 13 7.48043 13.1054 7.29289 13.2929C7.10536 13.4804 7 13.7348 7 14C7 14.2652 7.10536 14.5196 7.29289 14.7071C7.48043 14.8946 7.73478 15 8 15V15ZM17 4H15V3C15 2.20435 14.6839 1.44129 14.1213 0.87868C13.5587 0.316071 12.7956 0 12 0H8C7.20435 0 6.44129 0.316071 5.87868 0.87868C5.31607 1.44129 5 2.20435 5 3V4H3C2.20435 4 1.44129 4.31607 0.87868 4.87868C0.316071 5.44129 0 6.20435 0 7V17C0 17.7956 0.316071 18.5587 0.87868 19.1213C1.44129 19.6839 2.20435 20 3 20H17C17.7956 20 18.5587 19.6839 19.1213 19.1213C19.6839 18.5587 20 17.7956 20 17V7C20 6.20435 19.6839 5.44129 19.1213 4.87868C18.5587 4.31607 17.7956 4 17 4ZM7 3C7 2.73478 7.10536 2.48043 7.29289 2.29289C7.48043 2.10536 7.73478 2 8 2H12C12.2652 2 12.5196 2.10536 12.7071 2.29289C12.8946 2.48043 13 2.73478 13 3V4H7V3ZM18 17C18 17.2652 17.8946 17.5196 17.7071 17.7071C17.5196 17.8946 17.2652 18 17 18H3C2.73478 18 2.48043 17.8946 2.29289 17.7071C2.10536 17.5196 2 17.2652 2 17V10H18V17ZM18 8H2V7C2 6.73478 2.10536 6.48043 2.29289 6.29289C2.48043 6.10536 2.73478 6 3 6H17C17.2652 6 17.5196 6.10536 17.7071 6.29289C17.8946 6.48043 18 6.73478 18 7V8Z"
-                                        fill="#515559" />
-                                </svg>
-                                <p class="text-content-paragraph leading-none font-normal text-dark-gray">RSUD Dokter Juan
-                                    Alma</p>
-                            </div>
-                            <div class="flex justify-start">
-                                <div class="bg-primary-light px-3 py-1 rounded-xl">
-                                    <p class="text-sm text-light-gray"><span class="text-primary font-semibold">10
-                                            pasien</span>
-                                        telah
-                                        membuat janji</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex flex-col pt-4">
-                            <div class="flex flex-row justify-between md:flex-col">
-                                <p class="text-content-paragraph font-medium text-dark">Biaya Konsultasi</p>
-                                <p class="text-content-paragraph font-semibold text-primary">Rp150.000</p>
-                            </div>
-                            <x-main-button-link href="/" class="text-center mt-2 bg-secondary shadow-none">Buat janji</x-main-button-link>
-                        </div>
-                    </div>
-                </div>
-                <hr class="text-gray-100 w-full my-6">
-
+                @endforeach
             </div>
         </div>
         <x-footer-component></x-footer-component>

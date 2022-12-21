@@ -4,9 +4,7 @@
 <x-section-component {{ $attributes->merge(['class' => 'bg-white py-0']) }}>
     <nav id="navbar" class="flex flex-row w-full justify-between h-[86px] items-center">
         <div class="flex flex-row space-x-10">
-            <div class="flex">
-                <h1 class="text-primary">Teeth.id</h1>
-            </div>
+            <x-brand/>
             @if ($userAuth->isDoctor())
                 <ul
                     class="fixed h-screen top-0 right-0 flex flex-col space-y-10 pt-28 items-center w-[85%] translate-x-full glassmorphism-box z-20 lg:bg-transparent lg:border-none lg:translate-x-0 lg:pt-0 lg:w-auto lg:space-y-0 lg:h-auto lg:static lg:flex lg:flex-row lg:space-x-10 lg:pr-3">

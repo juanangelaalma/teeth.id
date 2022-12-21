@@ -20,13 +20,16 @@ Route::get('/', [HomeController::class, 'index'])->name('user.home');
 Route::get('beranda', [HomeController::class, 'index'])->name('user.home');
 Route::prefix('pesanan')->group(function() {
     Route::get('/', [PesananController::class, 'index'])->name('user.pesanan.index');
-    Route::get('/cetak-invoice', [PesananController::class, 'cetak_invoice'])->name('user.pesanan.cetak_invoice');
+    Route::get('/{order:id}/cetak-invoice', [PesananController::class, 'cetak_invoice'])->name('user.pesanan.cetak_invoice');
 });
 
 Route::prefix('/buat-janji')->group(function() {
     Route::get('/', [BuatJanjiController::class, 'index'])->name('buat_janji.index');
-    Route::get('/{doctor_id}/pilih-jadwal', [BuatJanjiController::class, 'pilih_jadwal'])->name('buat_janji.pilih_jadwal');
-    Route::get('/ringkasan-pesanan', [BuatJanjiController::class, 'ringkasan_pesanan'])->name('buat_janji.ringkasan_pesanan');
+    Route::get('/{user_id}/pilih-jadwal', [BuatJanjiController::class, 'pilih_jadwal'])->middleware('auth')->name('buat_janji.pilih_jadwal');
+    Route::post('/{user_id}/post-pilih-jadwal', [BuatJanjiController::class, 'post_pilih_jadwal'])->middleware('auth')->name('buat_janji.post_pilih_jadwal');
+    Route::get('/ringkasan-pesanan', [BuatJanjiController::class, 'ringkasan_pesanan'])->middleware('auth')->name('buat_janji.ringkasan_pesanan');
+    Route::post('/bayar-pesanan', [BuatJanjiController::class, 'bayar_pesanan'])->middleware('auth')->name('buat_janji.bayar_pesanan');
+    Route::get('/search', [BuatJanjiController::class, 'search'])->middleware('auth')->name('buat_janji.search');
 });
 
 Route::prefix('/forum')->group(function () {
@@ -75,6 +78,7 @@ Route::prefix('doctor')->middleware(['auth', 'doctor'])->group(function() {
 
     Route::prefix('order')->group(function() {
         Route::get('/', [DoctorOrderController::class, 'index'])->name('doctor.order.index');
+        Route::post('/{order:id}/asdone', [DoctorOrderController::class, 'done'])->name('doctor.order.asdone');
     });
     
     Route::prefix('clinic')->group(function() {

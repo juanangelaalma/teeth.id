@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('day', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']);
             $table->timestamps();
 
-            $table->foreign('clinic_id')->references('id')->on('clinics');
+            $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

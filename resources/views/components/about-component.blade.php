@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-col items-start w-full lg:w-1/2 justify-start space-y-6">
+        <div class="flex flex-col items-start w-full lg:w-1/2 justify-start space-y-6 md:pl-3">
             <span class="font-bold text-[25px] text-primary">About us</span>
             <h1 class="text-section-header font-bold text-dark">Gigi yang sehat dimulai dari perawatan rutin</h1>
             <p class="text-light-gray text-section-paragraph">simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
