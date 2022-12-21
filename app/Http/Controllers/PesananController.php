@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PesananController extends Controller
 {
     public function index() {
-        return view('pesanan.index');
+        $user = Auth::user();
+        $orders = Order::with('provider')->where('customer_id', $user->id)->get();
+        // with function looping
+        return view('pesanan.index', compact('orders'));
     }
 
     public function cetak_invoice() {

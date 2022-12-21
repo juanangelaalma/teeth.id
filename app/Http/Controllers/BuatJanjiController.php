@@ -124,6 +124,7 @@ class BuatJanjiController extends Controller
             'hour' => $request->hour,
             'cost' => $clinic->price,
             'status' => 'pending',
+            'invoice_id' => 'INV' . time(),
         ]);
 
         return redirect()->route('user.pesanan.index');
