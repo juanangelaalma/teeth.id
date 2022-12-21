@@ -15,7 +15,7 @@ class PesananController extends Controller
         return view('pesanan.index', compact('orders'));
     }
 
-    public function cetak_invoice() {
-        return view('pesanan.cetak_invoice');
+    public function cetak_invoice(Order $order) {
+        return view('pesanan.cetak_invoice', compact('order'));
     }
 }

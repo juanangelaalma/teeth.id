@@ -51,7 +51,7 @@
                         </div>
                         <div class="flex flex-col justify-start items-start lg:items-end space-y-3">
                             <h4 class="text-content-heading text-secondary">{{ to_rupiah($order->cost) }}</h4>
-                            <x-main-button-link class="px-12 mx-auto shadow-none w-full text-center">
+                            <x-main-button-link href="{{ route('user.pesanan.cetak_invoice', $order) }}" class="px-12 mx-auto shadow-none w-full text-center">
                                 Lihat invoice</x-main-button-link>
                         </div>
                     </div>

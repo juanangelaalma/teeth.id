@@ -15,6 +15,10 @@ class Order extends Model
         return $this->belongsTo(User::class, 'provider_id');
     }
 
+    public function customer() {
+        return $this->belongsTo(User::class, 'customer_id');
+    }
+
     public function clinic() {
         return $this->belongsToThrough(Clinic::class, User::class, 'provider_id');
     }
