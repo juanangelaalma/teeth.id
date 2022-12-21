@@ -4,6 +4,12 @@
             <span>Klinik saya</span>
         </label>
         <!-- Invalid input -->
+        @if (!Auth::user()->isVerified())
+        <div class="bg-secondary-opacity w-full rounde-xl rounded-lg p-4 mb-4">
+            <p class="text-dark-gray">Akun Anda belum diverifikasi. Lakukan upload dokumen agar kami dapat
+                verifikasi akun anda pada <a href="{{ route('doctor.documents.index') }}" class="text-primary">Verifikasi Sekarang</a></p>
+        </div>
+        @else
         <form class="flex flex-wrap items-end md:grid-cols-2 py-3 mb-8 space-y-4"
             action="{{ route('doctor.setting.clinic_update', $clinic ? $clinic : 'null') }}" method="POST"
             enctype="multipart/form-data">
@@ -83,6 +89,7 @@
                 <x-main-button>Simpan Perubahan</x-main-button>
             </div>
         </form>
+        @endif
     </div>
     <script>
       const openSwitcher = document.getElementById('is_open');
