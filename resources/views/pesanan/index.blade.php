@@ -12,7 +12,7 @@
                         <div class="flex flex-col lg:flex-row">
                             <div class="w-full overflow-hidden md:h-[140px] md:w-[140px] rounded-md mb-3 mx-auto lg:mx-0">
                                 <img class="w-full h-full object-cover object-center"
-                                    src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg"
+                                    src="{{ $order->provider->doctor->photo ? $order->provider->doctor->photo : '/assets/images/default.jpg' }}"
                                     alt="">
                             </div>
                             <div class="md:px-4 mb-3 space-y-2 md:space-y-3 md:py-3">

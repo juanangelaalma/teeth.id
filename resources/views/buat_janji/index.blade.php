@@ -84,7 +84,7 @@
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full overflow-hidden md:h-[140px] md:w-[140px] md:rounded-md mb-3 mx-auto">
                         <img class="w-full h-full object-cover object-center"
-                            src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg"
+                            src="{{ $doctor->doctor->photo ? $doctor->doctor->photo : '/assets/images/default.jpg' }}"
                             alt="">
                     </div>
                     <div class="space-y-2 md:flex-1 md:flex md:flex-row md:justify-between">
