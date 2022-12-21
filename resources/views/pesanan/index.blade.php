@@ -1,4 +1,4 @@
-@extends('layouts.user', ['title' => 'Artikel'])
+@extends('layouts.user', ['title' => 'Pesanan Saya'])
 
 @section('content')
     <div>

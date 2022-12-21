@@ -1,4 +1,4 @@
-@extends('layouts.user', ['title' => 'Artikel'])
+@extends('layouts.user', ['title' => 'Pilih Jadwal'])
 
 @section('content')
     <div>
@@ -124,7 +124,7 @@
                                 <li class="filter-switch-item relative hidden">
                                     <input type="radio" name="hour" id="hour-0" class="sr-only">
                                     <label for="hour-0"
-                                        class="border border-primary-light cursor-pointer h-auto py-1 px-4 text-sm text-center leading-6 text-light-gray font-normal bg-primary-light rounded">
+                                        class="border border-primary-light cursor-pointer h-auto py-1 px-4 text-sm text-center leading-6 text-light-gray font-normal bg-slate-100 rounded">
                                         <span class="text-[10px] md:text-sm block">09:00</span>
                                     </label>
                                     <div aria-hidden="true" class="filter-active"></div>
@@ -222,9 +222,9 @@
         }
 
         function loading() {
-            const loader = `<div class="w-20 h-10 rounded-lg animate-pulse bg-primary-light"></div>
-                              <div class="w-20 h-10 rounded-lg animate-pulse bg-primary-light"></div>
-                              <div class="w-20 h-10 rounded-lg animate-pulse bg-primary-light"></div>`
+            const loader = `<div class="w-20 h-10 rounded-lg animate-pulse bg-slate-100"></div>
+                              <div class="w-20 h-10 rounded-lg animate-pulse bg-slate-100"></div>
+                              <div class="w-20 h-10 rounded-lg animate-pulse bg-slate-100"></div>`
 
             morning.innerHTML = loader
             afternoon.innerHTML = loader
@@ -240,5 +240,7 @@
             refresh()
             appendToElement(hours)
         }
+        
+        getByDay('today', {{ $user->clinic->id }})
     </script>
 @endsection

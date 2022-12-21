@@ -1,4 +1,4 @@
-@extends('layouts.user', ['title' => 'Artikel'])
+@extends('layouts.user', ['title' => 'Ringkasan Pemesanan'])
 
 @section('content')
     <div>
@@ -186,7 +186,7 @@
                             <div class="flex justify-end items-center">
                                 <x-main-button type="submit" @click="open = true"
                                     class="px-12 mx-auto shadow-none w-full text-center">
-                                    Bayar</x-main-button>
+                                    Buat Pesanan</x-main-button>
                             </div>
                         </div>
                     </div>

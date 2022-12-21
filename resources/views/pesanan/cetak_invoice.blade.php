@@ -1,4 +1,4 @@
-@extends('layouts.user', ['title' => 'Artikel'])
+@extends('layouts.user', ['title' => 'Invoice'])
 
 @section('content')
     <div>
@@ -7,8 +7,8 @@
             <div class="flex flex-col lg:w-[793px] mx-auto">
                 <div class="flex w-full flex-row justify-between">
                     <div class="flex flex-col items-start">
-                        <h4 class="font-semibold text-primary">Teeth.id</h4>
-                        <h6 class="font-semibold text-dark text-paragraph text-[15px] lg:text-paragraph">Ketintang</h6>
+                        <x-brand/>
+                        <h6 class="font-semibold mt-2 text-dark text-paragraph text-[15px] lg:text-paragraph">Ketintang</h6>
                         <p class="text-[15px] lg:text-paragraph">Jl Raya Ketintang No. 78 </p>
                         <p class="text-[15px] lg:text-paragraph">Surabaya, Jawa Timur 66261</p>
                     </div>
