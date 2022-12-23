@@ -47,7 +47,7 @@ class ForumController extends Controller
         $forum = Forum::where('slug', $slug)->firstOrFail();
         $forum->update([
             'answer' => $request->answer,
-            'doctor_id' => auth()->user()->id,
+            'doctor_id' => auth()->user()->doctor->id,
         ]);
 
         return back();

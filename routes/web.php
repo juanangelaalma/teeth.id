@@ -29,7 +29,7 @@ Route::prefix('/buat-janji')->group(function() {
     Route::post('/{user_id}/post-pilih-jadwal', [BuatJanjiController::class, 'post_pilih_jadwal'])->middleware('auth')->name('buat_janji.post_pilih_jadwal');
     Route::get('/ringkasan-pesanan', [BuatJanjiController::class, 'ringkasan_pesanan'])->middleware('auth')->name('buat_janji.ringkasan_pesanan');
     Route::post('/bayar-pesanan', [BuatJanjiController::class, 'bayar_pesanan'])->middleware('auth')->name('buat_janji.bayar_pesanan');
-    Route::get('/search', [BuatJanjiController::class, 'search'])->middleware('auth')->name('buat_janji.search');
+    Route::get('/search', [BuatJanjiController::class, 'search'])->name('buat_janji.search');
 });
 
 Route::prefix('/forum')->group(function () {
