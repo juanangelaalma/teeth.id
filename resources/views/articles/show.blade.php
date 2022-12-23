@@ -89,8 +89,8 @@
                     </div>
                     <div class="flex flex-col mt-5">
                         <p class="text-content-paragraph font-medium text-dark">Biaya Konsultasi</p>
-                        <p class="text-content-paragraph font-semibold text-secondary">{{ $article->doctor->user->clinic ? $article->doctor->user->clinic->price : 0 }}</p>
-                        <x-main-button-link class="text-center mt-2">Buat janji</x-main-button-link>
+                        <p class="text-content-paragraph font-semibold text-secondary">{{ $article->doctor->user->clinic ? to_rupiah($article->doctor->user->clinic->price) : "Rp0" }}</p>
+                        <x-main-button-link class="text-center mt-2" href="{{ route('buat_janji.pilih_jadwal', $article->doctor->user->id) }}">Buat janji</x-main-button-link>
                     </div>
                 </div>
             </div>

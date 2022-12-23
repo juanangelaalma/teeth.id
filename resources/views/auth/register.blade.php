@@ -4,7 +4,7 @@
             <div class="flex items-center space-y-2 flex-col">
                 <a href="/">
                     {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
-                    <p class="text-primary">Teeth.id</p>
+                    <x-brand />
                 </a>
                 <h1 class="text-primary text-section-header font-semibold">Register</h1>
                 <p>Sign up to create your account</p>

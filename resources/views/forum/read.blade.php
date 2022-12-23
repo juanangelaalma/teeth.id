@@ -37,15 +37,17 @@
             <div class="mt-4 text-dark-gray">{!! $question->answer !!}</div>
         </div>
     @else
+        @auth
         @if (auth()->user()->role == 'doctor')
-            <form action="{{ route('user.forum.answer', $question->slug) }}" class="mt-4" method="POST">
-                @csrf
-                <div class="h-[500px]">
-                    <textarea class="form-control border-0" name="answer" id="body">{{ old('body') }}</textarea>
-                    <x-input-error :messages="$errors->get('body')" class="mt-2" />
-                </div>
-                <x-main-button type="submit" class="w-full mt-4">Jawab</x-main-button>
-            </form>
-        @endif
+        <form action="{{ route('user.forum.answer', $question->slug) }}" class="mt-4" method="POST">
+            @csrf
+            <div class="h-[500px]">
+                <textarea class="form-control border-0" name="answer" id="body">{{ old('body') }}</textarea>
+                <x-input-error :messages="$errors->get('body')" class="mt-2" />
+            </div>
+            <x-main-button type="submit" class="w-full mt-4">Jawab</x-main-button>
+        </form>
+    @endif
+        @endauth
     @endif
 </x-forum-layout>
